@@ -1,0 +1,517 @@
+version: "3.1"
+
+rules:
+
+#- rule: Say goodbye anytime the user says goodbye
+#  steps:
+#  - intent: goodbye
+#  - action: utter_goodbye
+
+- rule: Show help menu
+  steps:
+  - intent: menu  
+  - action: action_reset_all_slots  
+  - action: utter_select_category
+
+- rule: greet rule
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_intro1
+  - action: utter_intro2
+  - action: utter_intro3
+  - action: utter_intro4
+  - action: action_reset_all_slots
+  - action: utter_select_category
+
+- rule: ekaa category
+  steps:
+  - intent: ekaa
+  - action: action_reset_all_slots  
+  - action: action_set_Ekaa_Category
+  - action: utter_question_continue_ekaa
+
+- rule: visa category
+  steps:
+  - intent: visa
+  - action: action_reset_all_slots
+  - action: action_set_Visa_Category
+  - action: utter_question_continue_visa
+
+- rule: General About rule
+  steps:
+  - intent: About
+  - slot_was_set:
+    - selected_category: "Initial"
+  - action: utter_about_for_category
+
+- rule: General CriterionR rule
+  steps:
+  - intent: CriterionRequirement
+  - slot_was_set:
+    - selected_category: "Initial"
+  - action: utter_CriterionRequirement_for_category
+
+- rule: General issue rule
+  steps:
+  - intent: issue_procedure
+  - slot_was_set:
+    - selected_category: "Initial"
+  - action: utter_issue_for_category
+
+- rule: General duration rule
+  steps:
+  - intent: Duration
+  - slot_was_set:
+    - selected_category: "Initial"
+  - action: utter_duration_for_category
+
+- rule: Evidence Rule
+  steps:
+  - intent: evidence
+  - slot_was_set:
+    - selected_category: "Initial"
+  - action: utter_evidence_for_category
+
+- rule: Cost Rule
+  steps:
+  - intent: Cost
+  - slot_was_set:
+    - selected_category: "Initial"
+  - action: utter_cost_for_category
+
+- rule: General submission rule
+  steps:
+  - intent: Place_Of_Submission
+  - slot_was_set:
+    - selected_category: "Initial"
+  - action: utter_Place_Of_Submission_for_category
+
+- rule: about visa rule
+  steps:
+  - intent : About_visa
+  - action: action_set_Visa_Category
+  - action: action_db_about_visa
+  - action: utter_anything_else
+
+- rule: about ekaa rule
+  steps:
+  - intent : About_ekaa
+  - action: action_set_Ekaa_Category
+  - action: action_db_about_Ekaa
+  - action: utter_anything_else
+
+- rule: about passport rule
+  steps:
+  - intent: About_Passport
+  - action: action_set_Passport_Category
+  - action: action_db_about
+  - action: utter_about_details
+
+- rule:  who can have ekaa rule
+  steps:
+  - intent : WhoCanHave_Ekaa
+  - action: action_set_Ekaa_Category
+  - action: action_db_WhoCanHave_Ekaa
+  wait_for_user_input: false
+
+- rule:  who eka Duration rule
+  steps:
+  - intent : EkaaDuration
+  - action: action_set_Ekaa_Category
+  - action: action_db_Duration_Ekaa
+  - action: utter_anything_else
+
+- rule:  Countries Ekaa path rule
+  steps:
+  - intent : Countries_Ekaa
+  - action: action_set_Ekaa_Category
+  - action: action_db_Countries_Ekaa
+  wait_for_user_input: false
+
+- rule:  Countries need visa path rule
+  steps:
+  - intent : countries_need_visa
+  - action: action_set_Visa_Category
+  - action: action_db_countries_need_visa
+  wait_for_user_input: false
+
+- rule:  visa choice rule
+  steps:
+  - action: utter_question_continue_visa
+  - intent: affirm
+  - action: utter_continue
+  - action: utter_visa_continue
+
+- rule:  ekaa choice  rule
+  steps:
+  - action: utter_question_continue_ekaa
+  - intent: affirm
+  - action: utter_continue
+  - action: utter_ekaa_continue
+  
+- rule:  passport choice  rule
+  steps:
+  - action: utter_question_continue
+  - intent: affirm
+  - action: utter_continue
+  - action: utter_pass_continue
+
+########################################
+- rule:  Activate University form rule
+  steps:
+  - intent: ekaa_for_students
+  - action: action_reset_all_slots
+  - action: action_set_Ekaa_Category
+  - action: university_form
+  - active_loop: university_form
+
+- rule:  Activate University Main form rule
+  steps:
+  - intent: ekaa_for_students_menu
+  - action: action_reset_all_slots
+  - action: action_set_Ekaa_Category
+  - action: university_form
+  - active_loop: university_form
+
+- rule: Submit University form
+  condition:
+  - active_loop: university_form
+  steps: 
+  - active_loop: null
+  - action: action_db_Procedure_Ekaa
+  - action: utter_anything_else
+
+- rule: Procedure ekaa path ekaa_for_efka
+  steps: 
+  - intent: ekaa_for_efka
+  - action: action_reset_all_slots
+  - action: action_set_Ekaa_Category 
+  - action: action_db_Procedure_Ekaa 
+  - action: utter_anything_else
+
+- rule: Procedure ekaa path ekaa_for_efka Menu
+  steps: 
+  - action: utter_citizen_assured
+  - intent: ekaa_for_efka_menu
+  - action: action_reset_all_slots
+  - action: action_set_Ekaa_Category 
+  - action: action_db_Procedure_Ekaa 
+  - action: utter_anything_else
+
+##############################################
+
+- rule:  Activate country form From Countries rule
+  steps:
+  - action: utter_visa_country_details
+  - intent: affirm
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+- rule:  Activate country form From Country rule
+  steps:
+  - intent: country_need_visa
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+##
+- rule:  Activate country form issue detail visa  rule
+  steps:
+  - intent: Visa_issue_procedure_Detail
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+- rule:  Activate country form issue Main visa  rule
+  steps:
+  - intent: Visa_issue_procedure_Main
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+- rule:  Activate country form issue visa  rule
+  steps:
+  - intent: Visa_issue_procedure
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+- rule:  Activate country form issue visa General rule
+  steps:
+  - intent: issue_procedure
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+##
+
+- rule:  Activate country form cost visa  rule
+  steps:
+  - intent: Cost_ForVisa
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+- rule:  Activate country form cost visa  General rule
+  steps:
+  - intent: Cost
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+- rule:  Activate country form cost visa Main rule
+  steps:
+  - intent: Cost_ForVisa_Main
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+- rule:  Activate country form cost visa Detail rule
+  steps:
+  - intent: Cost_ForVisa_Detail
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+##
+- rule:  Activate country form evidence visa  rule
+  steps:
+  - intent: evidence_Forvisa
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+- rule:  Activate country form evidence visa Generla rule
+  steps:
+  - intent: evidence
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+- rule:  Activate country form evidence visa Main  rule
+  steps:
+  - intent: evidence_Forvisa_Main
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+- rule:  Activate country form evidence visa Detail rule
+  steps:
+  - intent: evidence_Forvisa_Detail
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+
+##
+
+- rule:  Activate country form duration visa  rule
+  steps:
+  - intent: VisaDuration
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+- rule:  Activate country form duration visa General  rule
+  steps:
+  - intent: Duration
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+##
+
+- rule:  Activate country form Place of Submission visa rule
+  steps:
+  - intent: Place_Of_Submission_Visa
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+- rule:  Activate country form Place of Submission visa General rule
+  steps:
+  - intent: Place_Of_Submission
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+
+- rule: Submit countries form
+  condition:
+  - active_loop: visa_for_country_form
+  steps: 
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  wait_for_user_input: false
+
+##################################################3
+
+- rule: Activate location form
+  steps:
+  - action: utter_find_location
+  - intent: affirm
+  - action: action_reset_all_slots
+  - action: location_form
+  - active_loop: location_form
+
+- rule: Submit location form
+  condition:
+  # Condition that form is active.
+  - active_loop: location_form
+  steps:
+  # Form is deactivated
+  - active_loop: null
+  - action: utter_slots_location_values
+  - action: action_set_Passport_Category
+  - action: action_db_Place_Of_Submission_location
+  - action: utter_send_with_email
+
+###############################################3
+- rule : Activate email form sub
+  condition:
+  - slot_was_set:
+    - info_for_email
+  - slot_was_set:
+    - subject_for_email
+  steps:
+  - action: action_db_Place_Of_Submission_location
+  - action: utter_send_with_email
+  - intent: affirm
+  - action: email_form
+  - active_loop: email_form
+
+- rule : Activate email form evidence
+  condition:
+  - slot_was_set:
+    - info_for_email
+  - slot_was_set:
+    - subject_for_email
+  steps:
+  - action: action_db_evidence
+  - action: utter_send_with_email
+  - intent: affirm
+  - action: email_form
+  - active_loop: email_form
+
+- rule : Activate email form sunday
+  condition:
+  - slot_was_set:
+    - info_for_email
+  - slot_was_set:
+    - subject_for_email
+  steps:
+  - action: action_db_Sunday_office
+  - action: utter_send_with_email
+  - intent: affirm
+  - action: email_form
+  - active_loop: email_form
+
+- rule : Activate email form Criterion
+  condition:
+  - slot_was_set:
+    - info_for_email
+  - slot_was_set:
+    - subject_for_email
+  steps:
+  - action: action_db_CriterionRequirement
+  - action: utter_send_with_email
+  - intent: affirm
+  - action: email_form
+  - active_loop: email_form
+
+- rule : Activate email form issue
+  condition:
+  - slot_was_set:
+    - info_for_email
+  - slot_was_set:
+    - subject_for_email
+  steps:
+  - action: action_db_passport_issue_procedure
+  - action: utter_send_with_email
+  - intent: affirm
+  - action: email_form
+  - active_loop: email_form
+
+- rule: Rule Passport_issue_procedure 
+  steps:
+  - intent: Passport_issue_procedure
+  - action: action_db_passport_issue_procedure
+  - action: utter_send_with_email
+
+- rule: Rule sunday office
+  steps:
+  - intent: Sunday_office
+  - action: action_db_Sunday_office
+  - action: utter_send_with_email
+
+- rule: Submit email form
+  condition:
+  # Condition that form is active.
+  - active_loop: email_form
+  steps:
+  # Form is deactivated
+  - active_loop: null
+  # The actions we want to run when the form is submitted.
+  - action: utter_accept_email
+  - action: action_send_email
+  - action: utter_anything_else
+#########################################
+- rule: Activate evidence form
+  steps:
+  - action: utter_inform_evidence
+  - action: action_reset_all_slots
+  - action: evidence_form
+  - active_loop: evidence_form
+
+- rule: Submit evidence form
+  condition:
+  - active_loop: evidence_form
+  steps: 
+  - active_loop: null
+  - action: action_db_evidence
+  - action: utter_send_with_email
+
+  #######################################################
+- rule: Activate evidence for visa form
+  steps:
+  - action: utter_evidence_forvisa
+  - action: action_reset_all_but_few_slots
+  - action: action_set_Visa_Category
+  - action: evidence_visa_form
+  - active_loop: evidence_visa_form
+
+- rule: Submit evidence for visa form
+  condition:
+  - active_loop: evidence_visa_form
+  steps: 
+  - active_loop: null
+  - slot_was_set:
+    - evidence_visa: "affirm"
+  - action: action_db_evidence_visa
+  - action: utter_anything_else_visa
+
+##################################################3333
+
+- rule: Activate cost for visa form
+  steps:
+  - action: utter_evidence_forcost
+  - action: action_reset_all_but_few_slots
+  - action: action_set_Visa_Category
+  - action: cost_visa_form
+  - active_loop: cost_visa_form
+
+- rule: Submit cost for visa form
+  condition:
+  - active_loop: cost_visa_form
+  steps: 
+    - active_loop: null
+    - slot_was_set:
+      - cost_visa: "affirm"
+    - action: action_db_cost_visa
+    - action: utter_anything_else_visa
+
+- rule: Ask the user to rephrase whenever they send a message with low NLU confidence
+  steps:
+  - intent: nlu_fallback
+  - action: utter_ask_rephrase

@@ -1,0 +1,1616 @@
+version: "3.1"
+
+stories:
+####################################################################
+
+- story: Show menu
+  steps:
+  - intent: menu
+  - action: action_reset_all_slots  
+  - action: utter_select_category
+
+####################################ΓΕΝΙΚΕΣ ΕΡΩΤΗΣΕΙΣ ########################################
+
+- story: About Choose General path 
+  steps:
+  - intent: About
+  - slot_was_set:
+    - selected_category: "Initial"
+  - action: utter_about_for_category
+
+- story: CriterionRequirement Choose General path
+  steps:
+  - intent: CriterionRequirement
+  - slot_was_set:
+    - selected_category: "Initial"
+  - action: utter_CriterionRequirement_for_category
+
+- story: Issue Choose General path
+  steps:
+  - intent: issue_procedure
+  - slot_was_set:
+    - selected_category: "Initial"
+  - action: utter_issue_for_category
+
+- story: Duration Choose General path
+  steps:
+  - intent: Duration
+  - slot_was_set:
+    - selected_category: "Initial"
+  - action: utter_duration_for_category
+
+- story: Cost Choose General path
+  steps:
+  - intent: Cost
+  - slot_was_set:
+    - selected_category: "Initial"
+  - action: utter_cost_for_category
+
+- story: PlaceOfSubmission Choose General path
+  steps:
+  - intent: Place_Of_Submission
+  - slot_was_set:
+    - selected_category: "Initial"
+  - action: utter_Place_Of_Submission_for_category
+
+- story: Evidence Choose General path
+  steps:
+  - intent: evidence
+  - slot_was_set:
+    - selected_category: "Initial"
+  - action: utter_evidence_for_category
+#######################################################################################
+
+- story: info path
+  steps:
+  - intent: info
+  - action: action_info
+  - action: utter_anything_else
+
+- story: greet 
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_intro1
+  - action: utter_intro2
+  - action: utter_intro3
+  - action: utter_intro4
+  - action: action_reset_all_slots
+  - action: utter_select_category
+
+# passport
+- story: passport Continue affirm 
+  steps:
+  - intent: passport
+  - action: utter_question_continue
+  - intent: affirm
+  - action: utter_continue
+  - action: utter_pass_continue
+
+- story: passport Continue deny
+  steps:
+  - intent: passport
+  - action: utter_question_continue
+  - intent: deny
+  - action: utter_non_continue
+
+- story: passport Continue with sample affirm
+  steps:
+  - intent: passport
+  - action: utter_question_continue
+  - intent: samples
+  - action: utter_samples_pass
+  - action: utter_question_continue2
+  - intent: affirm
+  - action: utter_continue
+  - action: utter_pass_continue
+
+- story: passport Continue with sample deny
+  steps:
+  - intent: passport
+  - action: utter_question_continue
+  - intent: samples
+  - action: utter_samples_pass
+  - action: utter_question_continue2
+  - intent: deny
+  - action: utter_non_continue
+
+#visa
+- story: visa Continue affirm 
+  steps:
+  - intent: visa
+  - action: action_reset_all_slots
+  - action: action_set_Visa_Category
+  - action: utter_question_continue_visa
+  - intent: affirm
+  - action: utter_continue
+  - action: utter_visa_continue
+
+- story: visa Continue deny
+  steps:
+  - intent: visa
+  - action: action_reset_all_slots
+  - action: action_set_Visa_Category
+  - action: utter_question_continue_visa
+  - intent: deny
+  - action: utter_non_continue
+
+- story: visa Continue with sample affirm
+  steps:
+  - intent: visa
+  - action: action_reset_all_slots
+  - action: action_set_Visa_Category
+  - action: utter_question_continue_visa
+  - intent: samples
+  - action: utter_samples_visa
+  - action: utter_question_continue2_visa
+  - intent: affirm
+  - action: utter_continue
+  - action: utter_visa_continue
+
+- story: visa Continue with sample deny
+  steps:
+  - intent: visa
+  - action: action_reset_all_slots
+  - action: action_set_Visa_Category
+  - action: utter_question_continue_visa
+  - intent: samples
+  - action: utter_samples_visa
+  - action: utter_question_continue2_visa
+  - intent: deny
+  - action: utter_non_continue
+  
+#ekaa
+
+- story: ekaa Continue affirm 
+  steps:
+  - intent: ekaa
+  - action: action_reset_all_slots  
+  - action: action_set_Ekaa_Category
+  - action: utter_question_continue_ekaa
+  - intent: affirm
+  - action: utter_continue
+  - action: utter_ekaa_continue
+
+- story: ekaa Continue deny
+  steps:
+  - intent: ekaa
+  - action: action_reset_all_slots  
+  - action: action_set_Ekaa_Category
+  - action: utter_question_continue_ekaa
+  - intent: deny
+  - action: utter_non_continue
+
+- story: ekaa Continue with sample affirm
+  steps:
+  - intent: ekaa
+  - action: action_reset_all_slots  
+  - action: action_set_Ekaa_Category
+  - action: utter_question_continue_ekaa
+  - intent: samples
+  - action: utter_samples_ekaa
+  - action: utter_question_continue2_ekaa
+  - intent: affirm
+  - action: utter_continue
+  - action: utter_ekaa_continue
+
+- story: ekaa Continue with sample deny
+  steps:
+  - intent: ekaa
+  - action: action_reset_all_slots  
+  - action: action_set_Ekaa_Category
+  - action: utter_question_continue_ekaa
+  - intent: samples
+  - action: utter_samples_ekaa
+  - action: utter_question_continue2_ekaa
+  - intent: deny
+  - action: utter_non_continue
+
+#################################################################################################
+- story: Place_Of_Submission General Passport happy path
+  steps:
+  - intent: Place_Of_Submission
+  - slot_was_set:
+    - selected_category: "passport"
+  - action: action_db_Place_Of_Submission_Passport
+  - action: utter_find_location
+  - intent: affirm
+  - action: action_reset_all_slots
+  - action: location_form
+  - active_loop: location_form
+  - active_loop: null
+  - action: utter_slots_location_values
+  - action: action_set_Passport_Category
+  - action: action_db_Place_Of_Submission_location
+  - action: utter_send_with_email
+
+- story: Place_Of_Submission General Passport sad path
+  steps:
+  - intent: Place_Of_Submission
+  - slot_was_set:
+    - selected_category: "passport"
+  - action: action_db_Place_Of_Submission_Passport
+  - action: utter_find_location
+  - intent: deny
+  - action: utter_anything_else
+
+- story: Place_Of_Submission_Passport happy path
+  steps:
+  - intent: Place_Of_Submission_Passport
+  - action: action_db_Place_Of_Submission_Passport
+  - action: utter_find_location
+  - intent: affirm
+  - action: action_reset_all_slots
+  - action: location_form
+  - active_loop: location_form
+  - active_loop: null
+  - action: utter_slots_location_values
+  - action: action_set_Passport_Category
+  - action: action_db_Place_Of_Submission_location
+  - action: utter_send_with_email
+  
+- story: Place_Of_Submission sad path
+  steps:
+  - intent: Place_Of_Submission_Passport
+  - action: action_db_Place_Of_Submission_Passport
+  - action: utter_find_location
+  - intent: deny
+  - action: utter_anything_else
+##############################################################################################
+#   ------------- Evidence form path ---------------
+
+
+- story: evidence General passport happy path1_1
+  steps:
+  - intent: evidence
+  - slot_was_set:
+    - selected_category: "passport"
+  - action: utter_evidence_passport
+  - intent: affirm
+  - action: utter_inform_evidence
+  - action: action_reset_all_slots
+  - action: evidence_form
+  - active_loop: evidence_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_db_evidence
+  - action: utter_send_with_email
+
+- story: evidence General paasport sad path
+  steps:
+  - intent: evidence
+  - slot_was_set:
+    - selected_category: "passport"
+  - action: utter_evidence_passport
+  - intent: deny
+  - action: utter_anything_else
+
+- story: evidence happy path1_1
+  steps:
+  - intent: evidence_passport
+  - action: utter_evidence_passport
+  - intent: affirm
+  - action: utter_inform_evidence
+  - action: action_reset_all_slots
+  - action: evidence_form
+  - active_loop: evidence_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_db_evidence
+  - action: utter_send_with_email
+
+- story: evidence sad path
+  steps:
+  - intent: evidence_passport
+  - action: utter_evidence_passport
+  # deny pattern can be a rule
+  - intent: deny
+  - action: utter_anything_else
+
+##################################################################################
+- story: evidence list path1_1 from General
+  steps:
+  - intent: evidence
+  - slot_was_set:
+    - selected_category: "passport"
+  - action: utter_evidence_passport
+  - intent: list_of_evidence
+  - action: action_db_list_of_evidence
+  - action: utter_evidence1
+  - intent: affirm
+  - action: utter_inform_evidence
+  - action: action_reset_all_slots
+  - action: evidence_form
+  - active_loop: evidence_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_db_evidence
+  - action: utter_send_with_email
+
+- story: evidence list path3 From General
+  steps:
+  - intent: evidence
+  - slot_was_set:
+    - selected_category: "passport"
+  - action: utter_evidence_passport
+  - intent: list_of_evidence
+  - action: action_db_list_of_evidence
+  - action: utter_evidence1
+  - intent: deny
+  - action: utter_anything_else
+
+- story: evidence list path1_1
+  steps:
+  - intent: evidence_passport
+  - action: utter_evidence_passport
+  - intent: list_of_evidence
+  - action: action_db_list_of_evidence
+  - action: utter_evidence1
+  - intent: affirm
+  - action: utter_inform_evidence
+  - action: action_reset_all_slots
+  - action: evidence_form
+  - active_loop: evidence_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_db_evidence
+  - action: utter_send_with_email
+
+- story: evidence list path3
+  steps:
+  - intent: evidence_passport
+  - action: utter_evidence_passport
+  - intent: list_of_evidence
+  - action: action_db_list_of_evidence
+  - action: utter_evidence1
+  - intent: deny
+  - action: utter_anything_else
+
+########################################################################################
+- story: sunday office
+  steps:
+  - intent: Sunday_office
+  - action: action_db_Sunday_office
+  - action: utter_send_with_email
+
+######################################################################################## 
+- story: General CriterionRequirement passport
+  steps:
+  - intent: CriterionRequirement
+  - slot_was_set:
+    - selected_category: "passport"
+  - action: action_db_CriterionRequirement
+  - action: utter_send_with_email
+
+- story: CriterionRequirement passport
+  steps:
+  - intent: CriterionRequirement_passport
+  - action: action_set_Passport_Category
+  - action: action_db_CriterionRequirement
+  - action: utter_send_with_email
+
+##################################################################################
+- story: Cases_of_passport_issue happy path
+  steps:
+  - intent: Cases_of_passport_issue
+  - action: action_db_cases_of_passport_issue
+  - action: utter_procedure_question
+  - intent: affirm
+  - action: action_db_passport_issue_procedure
+  - action: utter_send_with_email
+
+- story: Cases_of_passport_issue sad path
+  steps:
+  - intent: Cases_of_passport_issue
+  - action: action_db_cases_of_passport_issue
+  - action: utter_procedure_question
+  - intent: deny
+  - action: utter_anything_else
+  
+- story: general issue path passport 
+  steps:
+  - intent: issue_procedure
+  - slot_was_set:
+    - selected_category: "passport"
+  - action: action_db_passport_issue_procedure
+  - action: utter_send_with_email
+
+- story: Passport_issue_procedure 
+  steps:
+  - intent: Passport_issue_procedure
+  - action: action_db_passport_issue_procedure
+  - action: utter_send_with_email
+
+##################################################################################
+
+- story: Passport Cost path
+  steps:
+  - intent: Cost
+  - slot_was_set:
+    - selected_category: "passport"
+  - action: action_db_cost
+  - action: utter_anything_else
+
+- story:  Passport Cost path
+  steps:
+  - intent: Cost_Passport
+  - action: action_db_cost
+  - action: utter_anything_else
+
+##################################################################################
+# PASSPORT
+# TI EINAI ΔΙΑΒΑΤΗΡΙΟ
+
+- story: About General path pass 
+  steps:
+  - intent: About
+  - slot_was_set:
+    - selected_category: "passport"
+  - action: action_db_about
+
+- story: About path
+  steps:
+  - intent: About_Passport
+  - action: action_set_Passport_Category
+  - action: action_db_about
+  - action: utter_about_details
+
+# about passport
+- story: About path1
+  steps:
+  - action: utter_about_details
+  - intent: affirm
+  - action: action_db_about_details
+  - action: utter_anything_else
+
+- story: About path2
+  steps:
+  - action: utter_about_details
+  - intent: deny
+  - action: utter_anything_else
+
+
+#################################################################################################
+# VISA
+# ερωτήσεις για βίζα
+#  Τι είναι βίζα
+- story: About General path visa
+  steps:
+  - intent: About
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: action_db_about_visa
+  - action: utter_anything_else
+
+- story: About visa path
+  steps:
+  - intent : About_visa
+  - action: action_set_Visa_Category
+  - action: action_db_about_visa
+  - action: utter_anything_else
+
+# Ποιες οι προυποθέσεις
+
+- story: General Who can have visa
+  steps:
+  - intent: CriterionRequirement
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: utter_WhoCanHave_Visa
+  - action: utter_anything_else
+
+- story: Who can have visa
+  steps:
+  - intent: WhoCanHave_Visa
+  - action: action_set_Visa_Category
+  - action: utter_WhoCanHave_Visa
+  - action: utter_anything_else
+
+  # Ποιες χώρες χρειάζονται βίζα
+
+- story: List Countries Visa happy path
+  steps:
+  - intent : countries_need_visa
+  - action: action_set_Visa_Category
+  - action: action_db_countries_need_visa
+  - action: utter_visa_country_details
+  - intent: affirm
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: action_db_Countries_Details
+  - slot_was_set:
+    - DetailsVisa: "True"
+  - action: utter_visa_for_country_detail
+
+- story: List Countries Visa happy path no details
+  steps:
+  - intent : countries_need_visa
+  - action: action_set_Visa_Category
+  - action: action_db_countries_need_visa
+  - action: utter_visa_country_details
+  - intent: affirm
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: action_db_Countries_Details
+  - slot_was_set:
+    - DetailsVisa: "False"
+  - action: action_db_visa_issue_procedure
+  - action: utter_anything_else 
+
+- story: List Countries Visa happy path no Visa
+  steps:
+  - intent : countries_need_visa
+  - action: action_set_Visa_Category
+  - action: action_db_countries_need_visa
+  - action: utter_visa_country_details
+  - intent: affirm
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else
+
+- story: List Countries Visa sad path
+  steps:
+  - intent : countries_need_visa
+  - action: action_set_Visa_Category
+  - action: action_db_countries_need_visa
+  - action: utter_visa_country_details
+  - intent: deny
+  - action: utter_anything_else 
+
+# Χρειάζεται βίζα για την χώρα ....
+
+- story: Need visa to travel to country
+  steps:
+  - intent: country_need_visa
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: utter_country_need_visa
+  - action: utter_visa_details
+
+- story: Dont Need visa to travel to country
+  steps:
+  - intent: country_need_visa
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else 
+
+- story: Need visa to travel to country Main
+  steps:
+  - action: utter_visa_continue
+  - intent: country_need_visa_Main
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: utter_country_need_visa
+  - action: utter_visa_details
+
+- story: Dont Need visa to travel to country Main
+  steps:
+  - action: utter_visa_continue
+  - intent: country_need_visa_Main
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else 
+
+# Διαδικασία Έκδοσης
+
+- story: issue procedure general path visa needed
+  steps:
+  - intent: issue_procedure
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: action_db_visa_issue_procedure
+  - action: utter_anything_else_visa
+
+- story: issue procedure general path visa not needed
+  steps:
+  - intent: issue_procedure
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else 
+
+- story: visa issue procedure needed visa
+  steps:
+  - intent: Visa_issue_procedure
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: action_db_visa_issue_procedure
+  - action: utter_anything_else_visa
+
+- story: visa issue procedure dont needed visa
+  steps:
+  - intent: Visa_issue_procedure
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else
+
+- story: visa issue procedure needed visa detail
+  steps:
+  - action: utter_visa_for_country_detail
+  - intent: Visa_issue_procedure_Detail
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: action_db_visa_issue_procedure
+  - action: utter_anything_else_visa
+
+- story: visa issue procedure dont needed visa detail
+  steps:
+  - action: utter_visa_for_country_detail
+  - intent: Visa_issue_procedure_Detail
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else
+
+- story: visa issue procedure needed visa from main
+  steps:
+  - action: utter_visa_continue
+  - intent: Visa_issue_procedure_Main
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: action_db_visa_issue_procedure
+  - action: utter_anything_else_visa
+
+- story: visa issue procedure dont needed visa from main
+  steps:
+  - action: utter_visa_continue
+  - intent: Visa_issue_procedure_Main
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else
+
+# Που υποβάλλω για βίζα
+
+- story: place of submission visa General happy path - country need visa
+  steps:
+  - intent: Place_Of_Submission
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: action_db_Place_Of_Submission_Visa_Embassy
+  - action: action_db_Place_Of_Submission_eVisa
+  - action: action_db_Place_Of_Submission_Visa_OnArrival
+  - action: utter_anything_else_visa
+
+- story: place of submission visa General sad path - country need visa
+  steps:
+  - intent: Place_Of_Submission
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_anything_else
+  
+- story: place of submission visa happy path
+  steps:
+  - intent: Place_Of_Submission_Visa
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: action_db_Place_Of_Submission_Visa_Embassy
+  - action: action_db_Place_Of_Submission_eVisa
+  - action: action_db_Place_Of_Submission_Visa_OnArrival
+  - action: utter_anything_else_visa
+
+- story: place of submission  visa sad paht
+  steps:
+  - intent: Place_Of_Submission_Visa
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_anything_else
+
+- story: place of submission visa happy path Main
+  steps:
+  - action: utter_visa_continue
+  - intent: Place_Of_Submission_Visa_Main
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: action_db_Place_Of_Submission_Visa_Embassy
+  - action: action_db_Place_Of_Submission_eVisa
+  - action: action_db_Place_Of_Submission_Visa_OnArrival
+  - action: utter_anything_else_visa
+
+- story: place of submission  visa sad path Main
+  steps:
+  - action: utter_visa_continue
+  - intent: Place_Of_Submission_Visa_Main
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_anything_else
+
+- story: place of submission visa happy path Detail
+  steps:
+  - action: utter_visa_for_country_detail
+  - intent: Place_Of_Submission_Visa_Detail
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: action_db_Place_Of_Submission_Visa_Embassy
+  - action: action_db_Place_Of_Submission_eVisa
+  - action: action_db_Place_Of_Submission_Visa_OnArrival
+  - action: utter_anything_else_visa
+
+- story: place of submission  visa sad path Detail
+  steps:
+  - action: utter_visa_for_country_detail
+  - intent: Place_Of_Submission_Visa_Detail
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_anything_else
+
+# Διάρκεια
+
+- story: General visa_duration country has visa
+  steps:
+  - intent: Duration
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: action_db_visa_duration
+  - action: utter_anything_else_visa 
+
+- story: General visa_duration country doesn't have visa
+  steps:
+  - intent: Duration
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else 
+
+- story: visa_duration country has visa
+  steps:
+  - intent: VisaDuration
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: action_db_visa_duration
+  - action: utter_anything_else_visa 
+
+- story: visa_duration country doesn't have visa
+  steps:
+  - intent: VisaDuration
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else 
+
+- story: visa_duration country has visa Main
+  steps:
+  - action: utter_visa_continue 
+  - intent: VisaDuration_Main
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: action_db_visa_duration
+  - action: utter_anything_else_visa 
+
+- story: visa_duration country doesn't have visa Main
+  steps:
+  - action: utter_visa_continue 
+  - intent: VisaDuration_Main
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else 
+
+- story: visa_duration country has visa Detail
+  steps:
+  - action: utter_visa_for_country_detail 
+  - intent: VisaDuration_Detail
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: action_db_visa_duration
+  - action: utter_anything_else_visa 
+
+- story: visa_duration country doesn't have visa Detail
+  steps:
+  - action: utter_visa_for_country_detail 
+  - intent: VisaDuration_Detail
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else 
+
+# Δικαιολογητικά
+
+- story: evidence General visa happy path - country need visa
+  steps:
+  - intent: evidence
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: utter_evidence_forvisa
+  - action: action_reset_all_but_few_slots
+  - action: action_set_Visa_Category
+  - action: evidence_visa_form
+  - active_loop: evidence_visa_form
+  - active_loop: null
+  - action: action_db_evidence_visa
+  - action: utter_anything_else_visa
+
+- story: evidence General visa happy path - country doesnt need visa
+  steps:
+  - intent: evidence
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else
+
+##
+
+- story: evidence visa happy path - country need visa
+  steps:
+  - intent: evidence_Forvisa
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: utter_evidence_forvisa
+  - action: action_reset_all_but_few_slots
+  - action: action_set_Visa_Category
+  - action: evidence_visa_form
+  - active_loop: evidence_visa_form
+  - active_loop: null
+  - action: action_db_evidence_visa
+  - action: utter_anything_else_visa
+
+
+- story: evidence visa happy path - country doesnt need visa
+  steps:
+  - intent: evidence_Forvisa
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else
+
+##
+
+- story: evidence visa happy path - country need visa Main
+  steps:
+  - action: utter_visa_continue
+  - intent: evidence_Forvisa_Main
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: utter_evidence_forvisa
+  - action: action_reset_all_but_few_slots
+  - action: action_set_Visa_Category
+  - action: evidence_visa_form
+  - active_loop: evidence_visa_form
+  - active_loop: null
+  - action: action_db_evidence_visa
+  - action: utter_anything_else_visa
+
+
+- story: evidence visa happy path - country doesnt need visa Main
+  steps:
+  - action: utter_visa_continue
+  - intent: evidence_Forvisa_Main
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else
+
+##
+
+- story: evidence visa happy path - country need visa Detail
+  steps:
+  - action: utter_visa_for_country_detail
+  - intent: evidence_Forvisa_Detail
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: utter_evidence_forvisa
+  - action: action_reset_all_but_few_slots
+  - action: action_set_Visa_Category
+  - action: evidence_visa_form
+  - active_loop: evidence_visa_form
+  - active_loop: null
+  - action: action_db_evidence_visa
+  - action: utter_anything_else_visa
+
+
+- story: evidence visa happy path - country doesnt need visa Detail
+  steps:
+  - action: utter_visa_for_country_detail
+  - intent: evidence_Forvisa_Detail
+  - action: action_set_Visa_Category
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else
+
+# Κόστος βιζα
+
+- story: General cost visa happy path - country need visa - affirm
+  steps:
+  - intent: Cost
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: utter_evidence_forcost
+  - action: action_reset_all_but_few_slots
+  - action: action_set_Visa_Category
+  - action: cost_visa_form
+  - active_loop: cost_visa_form
+  - active_loop: null
+  - action: action_db_cost_visa
+  - action: utter_anything_else_visa
+
+- story: General cost visa happy path - country doesnt need visa
+  steps:
+  - intent: Cost
+  - slot_was_set:
+    - selected_category: "visa"
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: utter_anything_else
+
+  ##
+
+- story: cost visa happy path - country need visa - affirm
+  steps:
+  - intent: Cost_ForVisa
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: utter_evidence_forcost
+  - action: action_reset_all_but_few_slots
+  - action: action_set_Visa_Category
+  - action: cost_visa_form
+  - active_loop: cost_visa_form
+  - active_loop: null
+  - action: action_db_cost_visa
+  - action: utter_anything_else_visa
+
+- story: cost visa happy path - country doesnt need visa
+  steps:
+  - intent: Cost_ForVisa
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: action_set_Visa_Category
+  - action: utter_anything_else
+
+  ##
+
+- story: cost visa happy path - country need visa - affirm Main
+  steps:
+  - action: utter_visa_continue
+  - intent: Cost_ForVisa_Main
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: utter_evidence_forcost
+  - action: action_reset_all_but_few_slots
+  - action: action_set_Visa_Category
+  - action: cost_visa_form
+  - active_loop: cost_visa_form
+  - active_loop: null
+  - action: action_db_cost_visa
+  - action: utter_anything_else_visa
+
+- story: cost visa happy path - country doesnt need visa Main
+  steps:
+  - action: utter_visa_continue 
+  - intent: Cost_ForVisa_Main
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: action_set_Visa_Category
+  - action: utter_anything_else
+
+  ##
+
+- story: cost visa happy path - country need visa - affirm Detail
+  steps:
+  - action: utter_visa_for_country_detail
+  - intent: Cost_ForVisa_Detail
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "True"
+  - action: utter_evidence_forcost
+  - action: action_reset_all_but_few_slots
+  - action: action_set_Visa_Category
+  - action: cost_visa_form
+  - active_loop: cost_visa_form
+  - active_loop: null
+  - action: action_db_cost_visa
+  - action: utter_anything_else_visa
+
+- story: cost visa happy path - country doesnt need visa Detail
+  steps:
+  - action: utter_visa_for_country_detail
+  - intent: Cost_ForVisa_Detail
+  - action: visa_for_country_form
+  - active_loop: visa_for_country_form
+  - active_loop: null
+  - action: action_db_this_country_need_visa
+  - slot_was_set:
+    - needVisa: "False"
+  - action: utter_country_dont_need_visa
+  - action: action_set_Visa_Category
+  - action: utter_anything_else
+
+# Λεπτομέρειες για βίζα συγκεκριμένης χώρας
+
+- story: visa_details happy path
+  steps:
+  - action: utter_visa_details
+  - intent: affirm
+  - action: action_set_Visa_Category
+  - action: action_db_Countries_Details
+  - slot_was_set:
+    - DetailsVisa: "True"
+  - action: utter_visa_for_country_detail 
+
+- story: visa_details happy path no detail
+  steps:
+  - action: utter_visa_details
+  - intent: affirm
+  - action: action_set_Visa_Category
+  - action: action_db_Countries_Details
+  - slot_was_set:
+    - DetailsVisa: "False"
+  - action: action_db_visa_issue_procedure
+  - action: utter_anything_else 
+
+- story: visa_details sad path
+  steps:
+  - action: utter_visa_details
+  - intent: deny
+  - action: utter_anything_else 
+
+  
+##########################################################
+# Ερωτήσεις για ΕΚΑΑ 
+
+# Τι είναι η ΕΚΑΑ
+- story: About General path ekaa
+  steps:
+  - intent: About
+  - slot_was_set:
+    - selected_category: "ekaa"
+  - action: action_db_about_Ekaa
+  - action: utter_anything_else
+
+- story: About ekaa path
+  steps:
+  - intent : About_ekaa
+  - action: action_set_Ekaa_Category
+  - action: action_db_about_Ekaa
+  - action: utter_anything_else
+
+# Σε ποιες χώρες ισχύει η ΕΚΑΑ
+- story: Countries Ekaa path
+  steps:
+  - intent : Countries_Ekaa
+  - action: action_set_Ekaa_Category
+  - action: action_db_Countries_Ekaa
+  - action: utter_anything_else
+
+ # Ποιος μπορεί να εκδόσει ΕΚΑΑ
+- story: General Who can have ekaa
+  steps:
+  - intent: CriterionRequirement
+  - slot_was_set:
+    - selected_category: "ekaa"
+  - action: action_db_WhoCanHave_Ekaa
+  - action: utter_anything_else
+
+- story: Who can Have ekaa path
+  steps:
+  - intent : WhoCanHave_Ekaa
+  - action: action_set_Ekaa_Category
+  - action: action_db_WhoCanHave_Ekaa
+  - action: utter_anything_else
+
+# Δικαιολογητικά
+
+- story: evidence ekaa 
+  steps:
+  - intent: evidence
+  - slot_was_set:
+    - selected_category: "ekaa"
+  - action: utter_citizen_assured
+
+- story: evidence ekaa path
+  steps:
+  - intent: evidence_Forekaa
+  - action: action_set_Ekaa_Category
+  - action: utter_citizen_assured 
+
+# Διαδικασίες έκδοσης ΕΚΑΑ
+
+- story: Issue Procedure ekaa path
+  steps:
+  - intent : Procedure_Ekaa
+  - action: utter_citizen_assured
+
+- story: General Issue Procedure ekaa path
+  steps:
+  - intent: issue_procedure
+  - slot_was_set:
+    - selected_category: "ekaa"
+  - action: utter_citizen_assured
+
+  #
+
+- story: General place of submission ekaa
+  steps:
+  - intent: Place_Of_Submission
+  - slot_was_set:
+    - selected_category: "ekaa"
+  - action: utter_ekaa_place_of_submission_efka
+  - action: utter_ekaa_place_of_submission_university
+
+- story: place of submission ekaa
+  steps:
+  - intent: Place_Of_Submission_Ekaa
+  - action: action_set_Ekaa_Category
+  - action: utter_ekaa_place_of_submission_efka
+  - action: utter_ekaa_place_of_submission_university
+
+#########################################################33
+
+- story: Procedure ekaa path ekaa_for_university
+  steps: 
+  - intent: ekaa_for_students
+  - action: action_reset_all_slots
+  - action: action_set_Ekaa_Category
+  - action: university_form
+  - active_loop: university_form
+  - active_loop: null
+  - action: action_db_Procedure_Ekaa
+  - action: utter_anything_else
+
+- story: Procedure ekaa path ekaa_for_efka
+  steps: 
+  - intent: ekaa_for_efka
+  - action: action_reset_all_slots
+  - action: action_set_Ekaa_Category 
+  - action: action_db_Procedure_Ekaa 
+  - action: utter_anything_else
+
+- story: Procedure ekaa path ekaa_for_university Menu
+  steps: 
+  - action: utter_citizen_assured
+  - intent: ekaa_for_students_menu
+  - action: action_reset_all_slots
+  - action: action_set_Ekaa_Category
+  - action: university_form
+  - active_loop: university_form
+  - active_loop: null
+  - action: action_db_Procedure_Ekaa
+  - action: utter_anything_else
+
+- story: Procedure ekaa path ekaa_for_efka Menu
+  steps: 
+  - action: utter_citizen_assured
+  - intent: ekaa_for_efka_menu
+  - action: action_reset_all_slots
+  - action: action_set_Ekaa_Category 
+  - action: action_db_Procedure_Ekaa 
+  - action: utter_anything_else
+
+# Διάρκεια ΕΚΑΑ
+
+- story: genral Duration Ekaa path
+  steps:
+  - intent: Duration
+  - slot_was_set:
+    - selected_category: "ekaa"
+  - action: action_db_Duration_Ekaa
+  - action: utter_anything_else
+
+- story: Duration Ekaa path
+  steps:
+  - intent : EkaaDuration
+  - action: action_set_Ekaa_Category
+  - action: action_db_Duration_Ekaa
+  - action: utter_anything_else
+
+  # Κόστος ΕΚΑΑ
+
+- story: genral cost Ekaa path
+  steps:
+  - intent: Cost
+  - slot_was_set:
+    - selected_category: "ekaa"
+  - action: utter_cost_ekaa
+  - action: utter_anything_else
+
+- story: COST Ekaa path
+  steps:
+  - intent : Cost_ekaa
+  - action: action_set_Ekaa_Category
+  - action: utter_cost_ekaa
+  - action: utter_anything_else
+
+##################################################################################
+- story: Send with email happy path
+  steps:
+  - action: utter_send_with_email
+  - intent: affirm
+  - action: email_form
+  - active_loop: email_form
+  - active_loop: null
+  - action: utter_accept_email
+  - action: action_send_email
+  - action: utter_anything_else
+
+- story: Send with email cancel path
+  steps:
+  - action: utter_send_with_email
+  - intent: affirm
+  - action: email_form
+  - active_loop: email_form
+  - intent: cancel
+  - action: utter_cancel
+  - action: action_deactivate_loop
+  - active_loop: null
+  - action: utter_anything_else
+
+- story: Send with email sad path
+  steps:
+  - action: utter_send_with_email
+  - intent: deny
+  - action: utter_anything_else
+
+##################################################################################
+
+
+##################################################################################
+- story: Duration_of_passport path
+  steps:
+  - intent: Duration_of_passport
+  - action: action_db_duration_of_passport
+  - action: utter_anything_else
+
+- story: Emergency_passport_issuance path
+  steps:
+  - intent: Emergency_passport_issuance
+  - action: action_db_emergency_passport_issuance
+  - action: utter_anything_else
+
+- story: Loss_theft_of_passport path
+  steps:
+  - intent: Loss_theft_of_passport
+  - action: action_db_loss_theft_of_passport
+  - action: utter_anything_else
+
+##################################################################################
+- story: passport_content path
+  steps:
+  - intent: passport_content
+  - action: action_db_passport_content
+  - action: utter_anything_else
+
+- story: cancellation_of_passport path
+  steps:
+  - intent: cancellation_of_passport
+  - action: action_db_cancellation_of_passport
+  - action: utter_anything_else
+
+- story: poreia_aithshs path
+  steps:
+  - intent: poreia_aithshs
+  - action: utter_poreia_aithshs
+  - action: utter_anything_else
+
+##################################################################################
+- story: legal_resource path
+  steps:
+  - intent: legal_resource
+  - action: action_db_legal_resource
+  - action: utter_anything_else
+
+- story: e-paravolo path
+  steps:
+  - intent: eparavolo
+  - action: utter_eparavolo
+  - action: utter_anything_else
+
+- story: passport_photo path
+  steps:
+  - intent: passport_photo
+  - action: utter_passport_photo
+  - action: utter_anything_else
+
+  ##################################################################################
+- story: say goodbye happy path
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: utter_last_think
+  - action: utter_feedback
+  - intent: affirm
+  - action: action_db_feedback
+  - action: utter_thanks
+
+- story: say goodbye sad path
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: utter_last_think
+  - action: utter_feedback
+  - intent: deny
+  - action: action_db_feedback
+  - action: utter_never_mind
+
+##################################################################################
+- story: thanks happy path1
+  steps:
+  - intent: thanks
+  - action: utter_noworries
+  - action: utter_your_opinion
+  - intent: affirm
+  - action: utter_feedback
+  - intent: affirm
+  - action: action_db_feedback
+  - action: utter_thanks
+  - action: utter_anything_else
+
+- story: thanks happy path2
+  steps:
+  - intent: thanks
+  - action: utter_noworries
+  - action: utter_your_opinion
+  - intent: affirm
+  - action: utter_feedback
+  - intent: deny
+  - action: action_db_feedback
+  - action: utter_never_mind
+  - action: utter_anything_else
+
+- story: thanks sad path
+  steps:
+  - intent: thanks
+  - action: utter_noworries
+  - action: utter_your_opinion
+  - intent: deny
+  - action: utter_anything_else
+
+##################################################################################
+- story: bot challenge
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - action: utter_anything_else
+- story: out of scope
+  steps:
+  - intent: out_of_scope
+  - action: respond_out_of_scope
+  - action: utter_anything_else
+
+- story: country selection
+  steps:
+  - intent: Choose_Country
+  - action: utter_Choose_Country_for_category
+
+- story: country selection
+  steps:
+  - intent: visa_for_country_detail
+  - action: utter_visa_for_country_detail
