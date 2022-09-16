@@ -1,0 +1,36 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-Student_University",
+      "2": "I-Student_University",
+      "3": "L-Student_University",
+      "4": "U-Student_University",
+      "5": "B-country",
+      "6": "I-country",
+      "7": "L-country",
+      "8": "U-country",
+      "9": "B-email",
+      "10": "I-email",
+      "11": "L-email",
+      "12": "U-email",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-Student_University": 1,
+      "I-Student_University": 2,
+      "L-Student_University": 3,
+      "U-Student_University": 4,
+      "B-country": 5,
+      "I-country": 6,
+      "L-country": 7,
+      "U-country": 8,
+      "B-email": 9,
+      "I-email": 10,
+      "L-email": 11,
+      "U-email": 12,
+      "O": 0
+    },
+    "num_tags": 13
+  }
+]

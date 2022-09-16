@@ -1,0 +1,92 @@
+define
+    cost sub entity,
+        plays answer-conserns-cost:relative-cost-for-answer,
+        owns identifier @key,
+	    owns cost_value,
+	    owns currency,
+	    owns description,
+        owns sort_description,
+        owns weight;
+
+    evidence sub entity,
+        plays answer-excludes-evidence:relative-evidence-excluded-for-answer,
+        owns identifier @key,
+        owns name,
+	    owns description;
+
+    #output document
+    output sub entity,
+        plays answer-conserns-output:relative-output-for-answer,
+        owns identifier @key,
+        owns name, # passport duration
+        owns description,
+        owns weight;
+
+    answers sub entity,
+        plays answer-conserns-cost:relative-answer-has-cost,
+        plays answer-conserns-output:relative-answer-has-output,
+        plays answer-excludes-evidence:relative-answer-excludes-evidence,
+        plays questions-have-answers:realtive-answer-answers-question,
+        owns identifier @key,
+        owns name,
+        owns answers_value,
+        owns output_identifier,
+        owns cost_identifier;
+    
+    #not imported
+    questions sub entity,
+        plays questions-have-answers:relative-question-has-answers,
+        owns identifier @key,
+        owns description,
+        owns aa;
+
+# ------- abstract attributes -------
+    string_attribute sub attribute,
+        abstract,
+        value string;
+
+    int_attribute sub attribute,
+        abstract,
+        value long;
+
+    bool_attribute sub attribute,
+        abstract,
+        value boolean;
+
+# ------- end of abstract attributes -------
+
+    identifier sub string_attribute;
+    cost_value sub string_attribute;
+    currency sub string_attribute;
+    description sub string_attribute;
+    sort_description sub string_attribute;
+    name sub string_attribute;
+    description sub string_attribute;
+    aa sub string_attribute;
+    weight sub int_attribute;
+    
+    answers_value sub string_attribute;
+    cost_identifier sub string_attribute;
+    output_identifier sub string_attribute;
+
+    answer-conserns-cost sub relation,
+        relates relative-answer-has-cost,
+        relates relative-cost-for-answer;
+
+    answer-conserns-output sub relation,
+        relates relative-answer-has-output,
+        relates relative-output-for-answer;
+    
+    questions-have-answers sub relation,
+        relates relative-question-has-answers,
+        relates realtive-answer-answers-question;
+    
+    answer-excludes-evidence sub relation,
+        relates relative-answer-excludes-evidence,
+        relates relative-evidence-excluded-for-answer;
+
+    #not used
+    excluded-set sub relation,
+        relates excluded-evidence;
+        
+        

@@ -1,0 +1,98 @@
+ utter_ask_answer1:
+  - buttons:
+    - payload: /q1{{"answer1":"A0001"}}
+      title: Αρχική έκδοση
+    - payload: /q1{{"answer1":"A0002"}}
+      title: Ανανέωση
+    - payload: /q1{{"answer1":"A0003"}}
+      title: Αντικατάσταση
+    - payload: /q1{{"answer1":"A0004"}}
+      title: Απώλεια/κλοπή
+    text: Ποιά περίπτωση ισχύει από τα παρακάτω για την έκδοση του διαβατηρίου;
+  utter_ask_answer2:
+  - buttons:
+    - payload: /q2{{"answer2":"A0005"}}
+      title: Ενήλικος
+    - payload: /q2{{"answer2":"A0006"}}
+      title: Ανήλικος <12 ετών
+    - payload: /q2{{"answer2":"A0007"}}
+      title: Ανήλικος 12 ετών
+    - payload: /q2{{"answer2":"A0008"}}
+      title: Ανήλικος 13-14 ετών
+    - payload: /q2{{"answer2":"A0009"}}
+      title: Ανήλικος >14 ετών
+    text: Σε ποιά ηλικιακή ομάδα εντάσσεται ο ενδιαφερόμενος (κλεισμένα έτη);
+  utter_ask_answer3:
+  - buttons:
+    - payload: /q3{{"answer3":"A0011"}}
+      title: Όχι ✖
+    - payload: /q3{{"answer3":"A0010"}}
+      title: Ναι ✔
+    text: Υπάρχει πρόβλημα αυτοπρόσωπης παρουσίας για την έκδοση διαβατηρίου;
+  utter_ask_answer4:
+  - buttons:
+    - payload: /q4{{"answer4":"A0013"}}
+      title: Όχι ✖
+    - payload: /q4{{"answer4":"A0012"}}
+      title: Ναι ✔
+    text: Ο ενδιαφερόμενος τελεί σε απαγόρευση εξόδου από την χώρα αλλά απατείται
+      κατ' εξαίρεση έκδοση διαβατηρίου;
+  utter_ask_answer5:
+  - buttons:
+    - payload: /q5{{"answer5":"A0014"}}
+      title: Όχι ✖
+    - payload: /q5{{"answer5":"A0015"}}
+      title: Ναι ✔, υπάρχει μόνιμη αναπηρία
+    - payload: /q5{{"answer5":"A0016"}}
+      title: Ναι ✔, υπάρχει προσωρινή αναπηρία
+    text: Υπάρχει πρόβλημα λήψης δακτυλικών αποτυπωμάτων;
+  utter_ask_answer6:
+  - buttons:
+    - payload: /q6{{"answer6":"A0018"}}
+      title: Όχι ✖
+    - payload: /q6{{"answer6":"A0017"}}
+      title: Ναι ✔
+    text: Το διαβατήριο αφορά μεταγωγή κρατουμένου;
+  utter_ask_answer7:
+  - buttons:
+    - payload: /q7{{"answer7":"A0020"}}
+      title: Όχι ✖
+    - payload: /q7{{"answer7":"A0019"}}
+      title: Ναι ✔
+    text: Το διαβατήριο αφορά μόνιμο κάτοικο εξωτερικού χωρίς Αστυνομική Ταυτότητα;
+  utter_ask_answer8:
+  - buttons:
+    - payload: /q8{{"answer8":"A0022"}}
+      title: Όχι ✖
+    - payload: /q8{{"answer8":"A0021"}}
+      title: Ναι ✔
+    text: Υπάρχει κάποιο ζήτημα στην υποβαλλόμενη φωτογραφία λόγω προβλημάτων όρασης;
+  utter_ask_answer9:
+  - buttons:
+    - payload: /q9{{"answer9":"A0024"}}
+      title: Όχι ✖
+    - payload: /q9{{"answer9":"A0023"}}
+      title: Ναι ✔
+    text: Ο ενδιαφερόμενος είναι υπό επιτροπεία ή δικαστική συμπαράσταση;
+  utter_ask_answer10:
+  - buttons:
+    - payload: /q10{{"answer10":"A0026"}}
+      title: Όχι ✖
+    - payload: /q10{{"answer10":"A0025"}}
+      title: Ναι ✔
+    text: Ο ενδιαφερόμενος είναι μήπως ανυπότακτος εξωτερικού;
+  utter_ask_answer11:
+  - buttons:
+    - payload: /q11{{"answer11":"A0028"}}
+      title: Όχι ✖
+    - payload: /q11{{"answer11":"A0027"}}
+      title: Ναι ✔
+    text: Απαιτείται μήπως επείγουσα έκδοση διαβατηρίου εντός μίας (1) εργάσιμης ημέρας;
+  utter_ask_answer12:
+  - buttons:
+    - payload: /q12{{"answer12":"A0030"}}
+      title: Όχι ✖
+    - payload: /q12{{"answer12":"A0029"}}
+      title: Ναι ✔
+    text: Απαιτείται κατ'εξαίρεση χορήγηση διαβατηρίου για νοσηλεία στην αλλοδαπή,
+      μετά από κλοπή/απώλεια και πριν την ολοκλήρωση των σχετικών ερευνών;

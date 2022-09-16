@@ -1,0 +1,1473 @@
+version: "3.1"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- greet
+- goodbye
+- affirm
+- deny
+- bot_challenge
+- restart
+- cancel
+- passport
+- visa
+- ekaa
+- Visa_issue_procedure_Detail
+- Visa_issue_procedure_Main
+- VisaDuration_Main
+- Place_Of_Submission_Visa_Main
+- VisaDuration_Detail
+- Place_Of_Submission_Visa_Detail
+- country_need_visa_Main
+- visa_for_country_detail
+- evidence_Forvisa_Detail
+- evidence_Forvisa_Main
+- Cost_ForVisa_Main
+- Cost_ForVisa_Detail
+- Choose_Country
+- Place_Of_Submission
+- Place_Of_Submission_Passport
+- Place_Of_Submission_Visa
+- Place_Of_Submission_Ekaa
+- enter_email
+- Sunday_office
+- evidence
+- list_of_evidence
+- CriterionRequirement
+- Cases_of_passport_issue
+- Passport_issue_procedure
+- Cost
+- About
+- About_Passport
+- About_ekaa
+- About_visa
+- WhoCanHave_Visa
+- CriterionRequirement_passport
+- info
+- samples
+- menu
+- Duration
+- Duration_of_passport
+- Emergency_passport_issuance
+- Loss_theft_of_passport
+- passport_content
+- cancellation_of_passport
+- EkaaDuration
+- poreia_aithshs
+- legal_resource
+- eparavolo
+- passport_photo
+- thanks
+- out_of_scope
+- Countries_Ekaa
+- WhoCanHave_Ekaa
+- Procedure_Ekaa
+- Visa_issue_procedure
+- issue_procedure
+- ekaa_for_efka
+- ekaa_for_efka_menu
+- ekaa_for_students
+- ekaa_for_students_menu
+- ekaa_none_assure
+- Select_Student_University
+- countries_need_visa
+- country_need_visa
+- VisaDuration
+- evidence_Forvisa
+- evidence_Forekaa
+- evidence_passport
+- Cost_Passport
+- Cost_ForVisa
+- Cost_ekaa
+- q1:
+    use_entities: []
+- q2:
+    use_entities: []
+- q3:
+    use_entities: []
+- q4:
+    use_entities: []
+- q5:
+    use_entities: []
+- q6:
+    use_entities: []
+- q7:
+    use_entities: []
+- q8:
+    use_entities: []
+- q9:
+    use_entities: []
+- q10:
+    use_entities: []
+- q11:
+    use_entities: []
+- q12:
+    use_entities: []
+- qVisa0:
+    use_entities: []
+- qVisacost:
+    use_entities: []   
+- qVisa1:
+    use_entities: []
+- qVisa2:
+    use_entities: []
+- qVisa3:
+    use_entities: []
+- qVisa4:
+    use_entities: []
+- qVisa5:
+    use_entities: []
+- qVisa6:
+    use_entities: []
+- qVisa7:
+    use_entities: []
+- qVisa8:
+    use_entities: []
+- qVisa9:
+    use_entities: []
+- qVisa10:
+    use_entities: []
+- qVisa13:
+    use_entities: []
+- qVisa14:
+    use_entities: []
+- qVisa15:
+   use_entities: []
+- qVisa16:
+   use_entities: []
+- qVisa17:
+   use_entities: []
+
+entities:
+- email
+- answer1
+- answer2
+- answer3
+- answer4
+- answer5
+- answer6
+- answer7
+- answer8
+- answer9
+- answer10
+- answer11
+- answer12
+- selected_category
+- Student_University
+- country
+- evidence_visa
+- answerVisa1
+- answerVisa2
+- answerVisa3
+- answerVisa4
+- answerVisa5
+- answerVisa6
+- answerVisa7
+- answerVisa8
+- answerVisa9
+- answerVisa10
+- answerVisa13
+- answerVisa14
+- answerVisa15
+- answerVisa16
+- answerVisa17
+- cost_visa
+
+slots:
+  location:
+    type: any
+    influence_conversation: false
+    mappings:
+    - not_intent:
+      - deny
+      type: from_text
+      conditions:
+      - active_loop: location_form
+        requested_slot: location
+
+  requested_slot:
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: custom
+
+  selected_category:
+    type: categorical
+    values:
+      - passport
+      - visa
+      - ekaa
+      - Initial
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: selected_category
+  
+  needVisa:
+    type: categorical
+    values:
+      - True
+      - False
+    mappings:
+    - type: custom
+
+  DetailsVisa:
+    type: categorical
+    values:
+      - True
+      - False
+    mappings:
+    - type: custom
+
+  Student_University:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: Student_University
+      type: from_entity
+      conditions:
+      - active_loop: university_form
+    - type: from_entity
+      entity: Student_University
+
+  country:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: country
+      type: from_entity
+      conditions:
+      - active_loop: visa_for_country_form
+    - type: from_entity
+      entity: country
+
+  email:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: email
+      type: from_entity
+      conditions:
+      - active_loop: email_form
+    - type: from_entity
+      entity: email
+      
+  info_for_email:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: custom
+  subject_for_email:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: custom
+  answer1:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answer1
+      type: from_entity
+      conditions:
+      - active_loop: evidence_form
+    - type: from_entity
+      entity: answer1
+  answer10:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: answer10
+  answer11:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answer11
+      type: from_entity
+      conditions:
+      - active_loop: evidence_form
+    - type: from_entity
+      entity: answer11
+  answer12:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: answer12
+  answer2:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answer2
+      type: from_entity
+      conditions:
+      - active_loop: evidence_form
+    - type: from_entity
+      entity: answer2
+  answer3:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answer3
+      type: from_entity
+      conditions:
+      - active_loop: evidence_form
+    - type: from_entity
+      entity: answer3
+  answer4:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answer4
+      type: from_entity
+      conditions:
+      - active_loop: evidence_form
+    - type: from_entity
+      entity: answer4
+  answer5:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answer5
+      type: from_entity
+      conditions:
+      - active_loop: evidence_form    
+    - type: from_entity
+      entity: answer5
+  answer6:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answer6
+      type: from_entity
+      conditions:
+      - active_loop: evidence_form
+    - type: from_entity
+      entity: answer6
+  answer7:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answer7
+      type: from_entity
+      conditions:
+      - active_loop: evidence_form
+    - type: from_entity
+      entity: answer7
+  answer8:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answer8
+      type: from_entity
+      conditions:
+      - active_loop: evidence_form
+    - type: from_entity
+      entity: answer8
+  answer9:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answer9
+      type: from_entity
+      conditions:
+      - active_loop: evidence_form
+    - type: from_entity
+      entity: answer9
+
+  evidence_visa:
+    type: categorical
+    values:
+      - affirm
+      - deny
+    influence_conversation: false
+    mappings:
+    - entity: evidence_visa
+      type: from_entity
+      conditions:
+      - active_loop: evidence_visa_form
+    - type: from_entity
+      entity: evidence_visa
+
+  cost_visa:
+      type: categorical
+      values:
+        - affirm
+        - deny
+      influence_conversation: false
+      mappings:
+      - entity: cost_visa
+        type: from_entity
+        conditions:
+        - active_loop: cost_visa_form
+      - type: from_entity
+        entity: cost_visa
+        
+  answerVisa1:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answerVisa1
+      type: from_entity
+      conditions:
+      - active_loop: evidence_visa_form
+    - type: from_entity
+      entity: answerVisa1
+
+  answerVisa2:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answerVisa2
+      type: from_entity
+      conditions:
+      - active_loop: evidence_visa_form
+    - type: from_entity
+      entity: answerVisa2
+
+  answerVisa3:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answerVisa3
+      type: from_entity
+      conditions:
+      - active_loop: evidence_visa_form
+    - type: from_entity
+      entity: answerVisa3
+
+  answerVisa4:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answerVisa4
+      type: from_entity
+      conditions:
+      - active_loop: evidence_visa_form
+    - type: from_entity
+      entity: answerVisa4
+
+  answerVisa5:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answerVisa5
+      type: from_entity
+      conditions:
+      - active_loop: evidence_visa_form
+    - type: from_entity
+      entity: answerVisa5
+
+  answerVisa6:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answerVisa6
+      type: from_entity
+      conditions:
+      - active_loop: evidence_visa_form
+    - type: from_entity
+      entity: answerVisa6
+
+  answerVisa7:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answerVisa7
+      type: from_entity
+      conditions:
+      - active_loop: evidence_visa_form
+    - type: from_entity
+      entity: answerVisa7
+
+  answerVisa8:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answerVisa8
+      type: from_entity
+      conditions:
+      - active_loop: evidence_visa_form
+    - type: from_entity
+      entity: answerVisa8
+
+  answerVisa9:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answerVisa9
+      type: from_entity
+      conditions:
+      - active_loop: cost_visa_form
+    - type: from_entity
+      entity: answerVisa9
+
+  answerVisa10:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answerVisa10
+      type: from_entity
+      conditions:
+      - active_loop: cost_visa_form
+    - type: from_entity
+      entity: answerVisa10
+  
+  answerVisa13:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answerVisa13
+      type: from_entity
+      conditions:
+      - active_loop: cost_visa_form
+    - type: from_entity
+      entity: answerVisa13
+
+  answerVisa14:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answerVisa14
+      type: from_entity
+      conditions:
+      - active_loop: cost_visa_form
+    - type: from_entity
+      entity: answerVisa14
+
+  answerVisa15:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answerVisa15
+      type: from_entity
+      conditions:
+      - active_loop: cost_visa_form
+    - type: from_entity
+      entity: answerVisa15
+
+  answerVisa16:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answerVisa16
+      type: from_entity
+      conditions:
+      - active_loop: cost_visa_form
+    - type: from_entity
+      entity: answerVisa16
+      
+  answerVisa17:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: answerVisa17
+      type: from_entity
+      conditions:
+      - active_loop: cost_visa_form
+    - type: from_entity
+      entity: answerVisa17    
+
+responses:
+  utter_greet:
+  - text: Γεια σου 😃
+  - text: Χαίρετε 😃
+  - text: Καλώς ήλθες 😃
+  - text: Καλή σου ημέρα 😃
+  utter_intro1:
+  - text: Είμαι ο TravelDocBot 🌏, ο αυτόματος ψηφιακός βοηθός σου και είμαι εδώ για να σε πληροφορήσω σχετικά με έγγραφα που χρειάζεσαι για να ταξιδέψεις στο εξωτερικό.
+  utter_intro2:
+  - text: Όπως κατάλαβες η γλώσσα μου είναι τα ελληνικά. Έτσι μπορείς να πληροφορηθείς για την διαδικασία έκδοσης του ελληνικού διαβατηρίου
+  utter_intro3:
+  - text: "να μάθεις για ποιες χώρες χρειάζεσαι βίζα και να δεις λεπτομέρειες έκδοσης για 12 δημοφιλής προορισμούς ✈️: \n Κίνα, Ρωσία, Ινδία, Αίγυπτο, Μαλδίβες, Κούβα, Ιορδανία, Βιετνάμ, Κένυα, Μαδαγασκάρη, Νεπάλ, Τανζανία"
+  utter_intro4:
+  - text: καθώς και να βρεις πως μπορείς να εκδόσεις την Ευρωπαϊκή Κάρτας Ασφάλισης Ασθενείας (Ε.Κ.Α.Α)
+
+  utter_select_category:
+    - buttons:
+      - payload: /passport
+        title: Έκδοση Διαβατηρίου;
+      - payload: /visa
+        title: Έκδοση βίζα;
+      - payload: /ekaa
+        title: Έκδοση Ε.Κ.Α.Α;
+      text: "Θέλεις να εκδόσεις διαβατήριο, βίζα ή Ευρωπαϊκή Κάρτα Ασφάλισης Ασθένειας; Μπορείς να επιλέξεις μία από τις παρακάτω κατηγορίες για να πληροφορηθείς σχετικά ή  να με ρωτήσεις ότι θέλεις στο πλαίσιο παρακάτω. Σε κάθε περίπτωση γράψε **επιλογές** για να επανεμφανιστούν οι παρακάτω επιλογές πληροφόρησης."
+  
+  utter_citizen_assured:
+  - buttons:
+    - payload: /ekaa_for_students_menu
+      title: Ανασφάλιστος φοιτητής
+    - payload: /ekaa_for_efka_menu
+      title: Ασφαλισμένος πολίτης    
+    text: Σε ποια από την παραπάνω κατηγορία ανήκεις;
+
+  utter_question_continue:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    - payload: /samples
+      title: Παραδείγματα ερωτήσεων 💬
+    - payload: /info
+      title: Info for chatbot ℹ
+    text: Θα ήθελες να προχωρήσουμε και να σου δώσω ορισμένες επιλογές πληροφόρησης για το διαβατήριο;
+
+  utter_question_continue_visa:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    - payload: /samples
+      title: Παραδείγματα ερωτήσεων 💬  
+    text: Θα ήθελες να προχωρήσουμε και να σου δώσω ορισμένες επιλογές πληροφόρησης για την βίζα;
+
+  utter_question_continue_ekaa:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    - payload: /samples
+      title: Παραδείγματα ερωτήσεων 💬
+    text: Θα ήθελες να προχωρήσουμε και να σου δώσω ορισμένες επιλογές πληροφόρησης για την Ε.Κ.Α.Α;
+
+
+  utter_question_continue2:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    text: Θα ήθελες να σου δώσω ορισμένες επιλογές πληροφόρησης για το διαβατήριο;
+
+  utter_question_continue2_visa:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    text: Θα ήθελες να σου δώσω ορισμένες επιλογές πληροφόρησης για την βίζα; 
+
+  utter_question_continue2_ekaa:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    text: Θα ήθελες να σου δώσω ορισμένες επιλογές πληροφόρησης για την Ε.Κ.Α.Α; 
+
+  utter_samples_pass:
+  - text: "Κάνε μια ερώτηση ❓ για οτιδήποτε θέλεις να μάθεις σχετικά με την έκδοση διαβατηρίου όπως τα παραδείγματα :\n- Ποιό το κόστος έκδοσης διαβατηρίου;\n - Τι δικαιολογητικά απαιτούνται;\n- Πού υποβάλω τα δικαιολογητικά;\n- Ποιά η διάρκεια ισχύος του διαβατηρίου;\n- Τι γίνεται σε απώλεια/κλοπή του διαβατήριου;\nκ.α."
+  utter_samples_visa:
+  - text: "Κάνε μια ερώτηση ❓ για οτιδήποτε θέλεις να μάθεις σχετικά με την έκδοση βιζα όπως τα παραδείγματα :\n- Για ποιες χώρες απαιτείται έκδοση βιζα;\n- Ποιό το κόστος έκδοσης της βίζα;\n - Τι δικαιολογητικά απαιτούνται για την βίζα;\n- Πού υποβάλω τα δικαιολογητικά για βίζα;\n- Ποιά η διάρκεια ισχύος της βίζα;\n κ.α."
+  utter_samples_ekaa:
+  - text: "Κάνε μια ερώτηση ❓ για οτιδήποτε θέλεις να μάθεις σχετικά με την έκδοση ΕΚΑΑ όπως τα παραδείγματα :\n- Για ποιες χώρες ισχύει η ΕΚΑΑ;\n- Ποια είναι η διαδικασία έκδοσης της ΕΚΑΑ;\n- Ποιά η διάρκεια ισχύος της ΕΚΑΑ;\n κ.α."
+
+  utter_continue:
+  - text: 😃 Ωραία
+  - text: 😃 Περίφημα
+  - text: 😃 Χαίρομαι γι' αυτό
+  - text: 😃 Τέλεια
+
+  utter_pass_continue:
+  - buttons:
+    - payload: /About_Passport
+      title: Τι είναι διαβατήριο;
+    - payload: /CriterionRequirement_passport
+      title: Προϋποθέσεις έκδοσης;
+    - payload: /Cases_of_passport_issue
+      title: Περιπτώσεις έκδοσης;
+    - payload: /Cost_Passport
+      title: Κόστος έκδοσης;
+    - payload: /Passport_issue_procedure
+      title: Διαδικασία έκδοσης;
+    - payload: /evidence_passport
+      title: Δικαιολογητικά;
+    - payload: /Place_Of_Submission_Passport
+      title: Γραφεία Διαβατηρίων;
+    - payload: /Sunday_office
+      title: Γραφεία ανοικτά Κυριακή;
+    - payload: /Duration_of_passport
+      title: Διάρκεια ισχύος;
+    - payload: /Emergency_passport_issuance
+      title: Επείγουσα έκδοση;
+    - payload: /Loss_theft_of_passport
+      title: Aπώλεια/κλοπή;
+    - payload: /passport_content
+      title: Στοιχεία διαβατηρίου;
+    - payload: /cancellation_of_passport
+      title: Αφαίρεση διαβατηριου;
+    - payload: /legal_resource
+      title: Νομοθετικό πλαίσιο;
+    text: "Μπορείς να επιλέξεις μία από τις παρακάτω κατηγορίες για να πληροφορηθείς σχετικά ή μπορείς να με ρωτήσεις ότι θέλεις στο πλαίσιο παρακάτω. Σε κάθε περίπτωση γράψε **επιλογές διαβατήριο** για να επανεμφανιστούν οι παρακάτω επιλογές πληροφόρησης."
+
+  utter_visa_continue:
+  - buttons:
+    - payload: /About_visa
+      title: Τι είναι η βίζα;
+    - payload: /countries_need_visa
+      title: Για ποιες χώρες απαιτείται η έκδοση βίζα;
+    - payload: /country_need_visa_Main
+      title: Θα ήθελα να μάθω αν χρειάζομαι βίζα για να ταξιδέψω στην/στο ...    
+    - payload: /Visa_issue_procedure_Main
+      title: Διαδικασία Έκδοσης; 
+    - payload: /VisaDuration_Main
+      title: Διάρκεια ισχύος;
+    - payload: /Place_Of_Submission_Visa_Main
+      title: Που υποβάλλω αίτηση για βίζα;      
+    - payload: /evidence_Forvisa_Main
+      title: Δικαιολογητικά; 
+    - payload: /Cost_ForVisa_Main
+      title: Κόστος έκδοσης; 
+    text: "Μπορείς να επιλέξεις μία από τις παρακάτω κατηγορίες για να πληροφορηθείς σχετικά ή μπορείς να με ρωτήσεις ότι θέλεις στο πλαίσιο παρακάτω. Σε κάθε περίπτωση γράψε **επιλογές βίζα** για να επανεμφανιστούν οι παρακάτω επιλογές πληροφόρησης και **λεπτομέρειες βίζα** για να μάθεις περισσότερα για την επιλεγμένη χώρα. "
+  
+  utter_visa_country_details:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    text: "Θα ήθελες να μάθεις περισσότερες λεπτομέρειες για κάποια χώρα;"
+
+  utter_visa_details:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    text: "Θα ήθελες να μάθεις περισσότερες λεπτομέρειες;"
+
+  utter_visa_for_country_detail:
+  - buttons:  
+    - payload: /Visa_issue_procedure_Detail
+      title: Διαδικασία Έκδοσης; 
+    - payload: /VisaDuration_Detail
+      title: Διάρκεια ισχύος;
+    - payload: /Place_Of_Submission_Visa_Detail
+      title: Που υποβάλλω αίτηση για βίζα; 
+    - payload: /evidence_Forvisa_Detail
+      title: Δικαιολογητικά; 
+    - payload: /Cost_ForVisa_Detail
+      title: Κόστος έκδοσης; 
+    text: "Μπορείς να επιλέξεις μία από τις παρακάτω κατηγορίες για να πληροφορηθείς σχετικά ή μπορείς να με ρωτήσεις ότι θέλεις στο πλαίσιο παρακάτω. Σε κάθε περίπτωση γράψε **λεπτομέρειες βίζα** για να εμφανιστούν οι παρακάτω επιλογές για την επιλεγμένη χώρα, **επιλογές βίζα** για όλες τις επιλογές για βίζα ή **επιλογές** για να επανεμφανιστούν οι αρχικές επιλογές πληροφόρησης."
+ 
+  utter_ekaa_continue:
+  - buttons:
+    - payload: /About_ekaa
+      title: Τι είναι η Ε.Κ.Α.Α;
+    - payload: /Countries_Ekaa
+      title: Για ποιες χώρες ισχύει η ΕΚ.Α.Α;
+    - payload: /WhoCanHave_Ekaa
+      title: Ποιες είναι οι προυποθέσεις χορήγησης της Ε.Κ.Α.Α;      
+    - payload: /Procedure_Ekaa
+      title: Ποιες είναι οι διαδικασίες έκδοσης της Ε.Κ.Α.Α;
+    text: "Μπορείς να επιλέξεις μία από τις παρακάτω κατηγορίες για να πληροφορηθείς σχετικά ή μπορείς να με ρωτήσεις ότι θέλεις στο πλαίσιο παρακάτω. Σε κάθε περίπτωση γράψε **επιλογές εκαα** για όλες τις επιλογές για Ε.Κ.Α.Α ή **επιλογές** για να επανεμφανιστούν οι αρχικές επιλογές πληροφόρησης."
+
+  utter_ask_Student_University:
+  - text: Ποιο είναι το πανεπιστήμιο σου;
+
+  utter_ask_country:
+  - text: Σε ποια χώρα θέλεις να ταξιδέψεις;
+
+  utter_about_for_category:
+  - buttons:
+    - payload: /About_Passport
+      title: Διαβατήριο
+    - payload: /About_visa
+      title: βίζα
+    - payload: /About_ekaa
+      title: EKAA
+    text: "Το ερώτημα σου αφορά διαβατήριο, βίζα ή Ε.Κ.Α.Α; Μπορείς να επιλέξεις μία από τις παρακάτω κατηγορίες ή να επαναδιατυπώσεις την ερώτηση σου."
+
+  utter_CriterionRequirement_for_category:
+    - buttons:
+      - payload: /CriterionRequirement_passport
+        title: Διαβατήριο
+      - payload: /WhoCanHave_Visa
+        title: βίζα
+      - payload: /WhoCanHave_Ekaa
+        title: EKAA
+      text: "Θες να μάθεις ποιες είναι οι προυποθέσεις για έκδοση διαβατηρίου, βίζα ή EKAA; Μπορείς να επιλέξεις μία από τις παρακάτω κατηγορίες ή να επαναδιατυπώσεις την ερώτηση σου."
+
+  utter_issue_for_category:
+  - buttons:
+    - payload: /Passport_issue_procedure
+      title: Διαβατήριο
+    - payload: /Visa_issue_procedure
+      title: βίζα
+    - payload: /Procedure_Ekaa
+      title: Ε.Κ.Α.Α
+    text: "Θες να μάθεις διαδικασίες έκδοσης για διαβατήριο, βίζα ή Ε.Κ.Α.Α; Μπορείς να επιλέξεις μία από τις παρακάτω κατηγορίες ή να επαναδιατυπώσεις την ερώτηση σου."
+
+  utter_duration_for_category:
+  - buttons:
+    - payload: /Duration_of_passport
+      title: Διαβατήριο
+    - payload: /VisaDuration
+      title: βίζα
+    - payload: /EkaaDuration
+      title: Ε.Κ.Α.Α
+    text: "Θες να μάθεις την διάρκεια για διαβατήριο, βίζα ή Ε.Κ.Α.Α; Μπορείς να επιλέξεις μία από τις παρακάτω κατηγορίες ή να επαναδιατυπώσεις την ερώτηση σου."
+
+  utter_Place_Of_Submission_for_category:
+  - buttons:
+    - payload: /Place_Of_Submission_Passport
+      title: Διαβατήριο
+    - payload: /Place_Of_Submission_Visa
+      title: βίζα
+    - payload: /Place_Of_Submission_Ekaa
+      title: E.K.A.A
+    text: "Θες να μάθεις που υποβάλλεις για έκδοση διαβατηρίου, βίζα ή Ε.Κ.Α.Α; Μπορείς να επιλέξεις μία από τις παρακάτω κατηγορίες ή να επαναδιατυπώσεις την ερώτηση σου."
+
+  utter_evidence_for_category:
+  - buttons:
+    - payload: /evidence_passport
+      title: Διαβατήριο
+    - payload: /evidence_Forvisa
+      title: βίζα
+    - payload: /evidence_Forekaa
+      title: E.K.A.A
+    text: "Θες να μάθεις τα δικαιολογητικά για διαβατήριο, βίζα ή Ε.Κ.Α.Α; Μπορείς να επιλέξεις μία από τις παρακάτω κατηγορίες ή να επαναδιατυπώσεις την ερώτηση σου."
+
+  utter_cost_for_category:
+  - buttons:
+    - payload: /Cost_Passport
+      title: Διαβατήριο
+    - payload: /Cost_ForVisa
+      title: βίζα
+    - payload: /Cost_ekaa
+      title: E.K.A.A
+    text: "Θες να μάθεις το κόστος για διαβατήριο ή βίζα; Μπορείς να επιλέξεις μία από τις παρακάτω κατηγορίες ή να επαναδιατυπώσεις την ερώτηση σου."
+
+# Ερωτήσεις για κόστος βίζα
+
+  utter_ask_cost_visa:
+    - buttons:
+      - payload: /qVisacost{{"cost_visa":"affirm"}}
+        title: Ναι, Θέλω ✔
+      - payload: /qVisacost{{"cost_visa":"deny"}}
+        title: Όχι, άλλη φορά ✖
+      text: "Θα ήθελες να δούμε μαζί ποιο είναι το κόστος για εσένα;"
+
+  utter_ask_answerVisa9:
+  - text: Ποια είναι η διάρκεια του ταξιδιού σου;
+
+  utter_ask_answerVisa10:
+  - buttons:
+    - payload: /qVisa10{{"answerVisa10":"A0049"}}
+      title: Μια φορά
+    - payload: /qVisa10{{"answerVisa10":"A0050"}}
+      title: Πολλές φορές
+    text: Θέλεις να εισέλθεις στην χώρα μία ή πολλές φορές;
+
+  utter_ask_answerVisa13:
+  - buttons:
+    - payload: /qVisa13{{"answerVisa13":"A0090"}}
+      title: Ηλεκτρονική βίζα
+    - payload: /qVisa13{{"answerVisa13":"A0091"}}
+      title: Βίζα στην Πρεσβεία
+    - payload: /qVisa13{{"answerVisa13":"A0092"}}
+      title: Έκδοση Visa κατά την άφιξη
+    - payload: /qVisa13{{"answerVisa13":"All"}}
+      title: Όλοι  
+    text: Ποιος φορέας έκδοσης σε ενδιαφέρει;
+
+  utter_ask_answerVisa14:
+  - buttons:
+    - payload: /qVisa14{{"answerVisa14":"A0039"}}
+      title: Είναι ο τελικός προορισμός
+    - payload: /qVisa14{{"answerVisa14":"A0040"}}
+      title: Απλή διέλευση
+    text: Είναι η χώρα ο τελικός προορισμός σου ή σε ενδιαφέρει απλή διέλευση;
+
+  utter_ask_answerVisa15:
+  - buttons:
+    - payload: /qVisa15{{"answerVisa15":"A0011"}}
+      title: Όχι ✖
+    - payload: /qVisa15{{"answerVisa15":"A0010"}}
+      title: Ναι ✔
+    text: Υπάρχει πρόβλημα αυτοπρόσωπης παρουσίας για την έκδοση;
+
+  utter_ask_answerVisa16:
+  - buttons:
+    - payload: /qVisa16{{"answerVisa16":"A0053"}}
+      title: Έκδοση Regular visa εντός 4 εργάσιμων ημερών
+    - payload: /qVisa16{{"answerVisa16":"A0052"}}
+      title: Έκδοση Express visa εντός 3 εργάσιμων ημερών
+    - payload: /qVisa16{{"answerVisa16":"A0051"}}
+      title: Έκδοση Urgent visa εντός 1 - 2 εργάσιμων ημερών
+    text: Θέλεις να εκδόσεις απλή, γρήγορη ή επίγουσα βίζα;
+
+  utter_ask_answerVisa17:
+  - buttons:
+    - payload: /qVisa17{{"answerVisa17":"A0055"}}
+      title: Έκδοση Regular visa εντός 4 - 20 ημερών
+    - payload: /qVisa17{{"answerVisa17":"A0054"}}
+      title: Έκδοση Express visa εντός 1-3 εργάσιμων ημερών 
+    text: Θέλεις να εκδόσεις απλή ή επίγουσα βίζα;
+
+# Ερωτήσεις για Δικαιολογητικά βίζα
+  utter_evidence_forvisa:
+  - text: "Τα δικαιολογητικά διαφοροποιούνται αναλόγως την περίπτωση σου.\n- θα προχωρήσω σε κάποιες ερωτήσεις.\n- Ανάλογα με τις\
+    \ απαντήσεις σου  θα ανακαλύψουμε τα δικαιολογητικά\
+    \ της βίζα που  αντιστοιχούν σε εσένα.\n- Επίλεξε τις απαντήσεις σου πατώντας τα\
+    \ κουμπιά \U0001F39B και σε περίπτωση που επιθυμείς διακοπή της διαδικασίας\
+    \ μπορείς να  πληκτρολογήσεις το νέο ερώτημα σου ή γράψε **επιλογές**  για να\
+    \ εμφανιστούν οι κατηγορίες πληροφόρησης." 
+  utter_evidence_forcost:
+  - text: "Το κόστος διαφοροποιείται αναλόγως την περίπτωση σου.\n- θα προχωρήσω σε κάποιες ερωτήσεις.\n- Ανάλογα με τις\
+    \ απαντήσεις σου  θα ανακαλύψουμε το κόστος \
+    \ της βίζα που σου αντιστοιχεί.\n- Επίλεξε τις απαντήσεις σου πατώντας τα\
+    \  κουμπιά \U0001F39B και σε περίπτωση που επιθυμείς διακοπή της διαδικασίας\
+    \ μπορείς να  πληκτρολογήσεις το νέο ερώτημα σου ή γράψε **επιλογές**  για να\
+    \ εμφανιστούν οι κατηγορίες πληροφόρησης." 
+  utter_ask_evidence_visa:
+  - buttons:
+    - payload: /qVisa0{{"evidence_visa":"affirm"}}
+      title: Ναι, Θέλω ✔
+    - payload: /qVisa0{{"evidence_visa":"deny"}}
+      title: Όχι, άλλη φορά ✖
+    text: "Θα ήθελες να δούμε μαζί ποια ακριβώς απαιτούνται;"
+
+  utter_ask_answerVisa1:
+  - buttons:
+    - payload: /qVisa1{{"answerVisa1":"A0031"}}
+      title: Ναι ✔
+    - payload: /qVisa1{{"answerVisa1":"A0032"}}
+      title: Όχι ✖
+    text: Είσαι Έλληνας Πολίτης;
+      
+  utter_greek_visa:
+  - text: Γνωρίζω μόνο αν απαιτείται βίζα. Σε περίπτωση που δεν γνωρίζεις αν είναι απαραίτητη η έκδοση βίζα επικοινωνήσε με την πρεσβεία της χώρας καταγωγής σου.
+
+  utter_ask_answerVisa2:
+  - buttons:
+    - payload: /qVisa2{{"answerVisa2":"A0090"}}
+      title: Ηλεκτρονική βίζα
+    - payload: /qVisa2{{"answerVisa2":"A0091"}}
+      title: Βίζα στην Πρεσβεία
+    - payload: /qVisa2{{"answerVisa2":"A0092"}}
+      title: Έκδοση Visa κατά την άφιξη
+    - payload: /qVisa2{{"answerVisa2":"All"}}
+      title: Όλοι  
+    text: Ποιος φορέας έκδοσης σε ενδιαφέρει;
+
+  utter_ask_answerVisa3:
+  - buttons:
+    - payload: /qVisa3{{"answerVisa3":"A0034"}}
+      title: Όχι ✖
+    - payload: /qVisa3{{"answerVisa3":"A0033"}}
+      title: Ναι ✔
+    text: Είσαι αλλοδαπός κατοίκος πρώην Κινέζος πολίτης που έχει αποκτήσει ξένη υπηκοότητα;
+
+  utter_ask_answerVisa4:
+  - buttons:    
+    - payload: /qVisa4{{"answerVisa4":"A0036"}}
+      title: Όχι ✖
+    - payload: /qVisa4{{"answerVisa4":"A0035"}}
+      title: Ναι ✔      
+    text: Είσαι αλλοδαπός κατοίκος πρώην Ινδός πολίτης που έχει αποκτήσει ξένη υπηκοότητα;
+
+  utter_ask_answerVisa5:
+  - buttons:
+    - payload: /qVisa5{{"answerVisa5":"A0038"}}
+      title: Όχι ✖  
+    - payload: /qVisa5{{"answerVisa5":"A0037"}}
+      title: Ναι ✔
+    text: Είσαι κάτοχος Διαβατηρίου 2ης Εθνικότητας;
+
+  utter_ask_answerVisa6:
+  - buttons:
+    - payload: /qVisa6{{"answerVisa6":"A0039"}}
+      title: Είναι ο τελικός προορισμός
+    - payload: /qVisa6{{"answerVisa6":"A0040"}}
+      title: Απλή διέλευση
+    text: Είναι η χώρα ο τελικος προορισμός σου ή σε ενδιαφέρει απλή διέλευση;
+
+  utter_ask_answerVisa7:
+  - buttons:
+    - payload: /qVisa7{{"answerVisa7":"No"}}
+      title: Όχι ✔  
+    - payload: /qVisa7{{"answerVisa7":"Yes"}}
+      title: Ναι ✖
+    text: H βίζα αφορά ανήλικο < 12 ετών;
+
+  utter_ask_answerVisa8:
+  - buttons:
+    - payload: /qVisa8{{"answerVisa8":"A0011"}}
+      title: Όχι ✖
+    - payload: /qVisa8{{"answerVisa8":"A0010"}}
+      title: Ναι ✔
+    text: Υπάρχει πρόβλημα αυτοπρόσωπης παρουσίας για την έκδοση;
+
+  utter_none_citizen_assured:
+    - text: "Για τη χορήγηση της Ευρωπαϊκής Κάρτας Ασφάλισης Ασθενείας (ΕΚΑΑ), οι ασφαλισμένοι υποβάλλουν την αίτηση στο δικτυακό τόπο του e-ΕΦΚΑ www.efka.gov.gr στην επιλογή Ασφαλισμένοι -> Ηλεκτρονικές Υπηρεσίες για Ασφαλισμένους -> Έκδοση Ε.Κ.Α.Α (χρήση κωδικών Taxisnet άμεσα ασφαλισμένου). \n Η ηλεκτρονική υποβολή της αίτησης χορήγησης της Ευρωπαϊκής Κάρτας Ασφάλισης Ασθενείας (ΕΚΑΑ) μπορεί να διεκπεραιώνεται και μέσω των ΚΕΠ. Οι ασφαλισμένοι και οι συνταξιούχοι του e-ΕΦΚΑ μπορούν να μεταβούν και στα Κέντρα Εξυπηρέτησης Πολιτών (Κ.Ε.Π.), προκειμένου να αιτηθούν την έκδοση της Ευρωπαϊκής Κάρτας Ασφάλισης Ασθενείας."
+
+  utter_non_continue:
+  - text: "Μπορείς να με ρωτήσεις ότι θέλεις στο πλαίσιο παρακάτω.\n- Σε κάθε περίπτωση\
+      \ γράψε **επιλογές** για να εμφανιστούν οι επιλογές πληροφόρησης."
+  utter_goodbye:
+  - text: Γειά σου! Καλή συνέχεια!
+  - text: Αντίο!
+  - text: Γειά χαρά! Καλή συνέχεια!
+  - text: Γειά σου. Θα χαρώ πολύ να σε ξαναδώ!
+  - text: Καλή συνέχεια, ευχαριστώ για τη συνομιλία!
+  - text: Αντίο, καλή συνέχεια!
+  - text: Γειά σου. Είμαι πάντοτε στη διάθεσή σου!
+  utter_default:
+  - text: Λυπάμαι, δεν σε κατάλαβα. Μπορείς να επαναλάβεις;
+  - text: Φοβάμαι ότι δεν σε κατάλαβα. Επαναδιατύπωσε σε παρακαλώ...
+  - text: Δυστυχώς, δεν σε κατάλαβα. Ακόμα μαθαίνω. Πες μου το λίγο διαφορετικά...
+  - text: Λυπάμαι αλλά δεν έγινε κατανοητό. Προσπάθησε λίγο διαφορετικά...
+  utter_cancel:
+  - text: Έγινε, ακυρώνω την αποστολή του email...
+  - text: Όπως επιθυμείς, η αποστολή του email ακυρώνεται...
+  - text: Η αποστολή του email ακυρώθηκε...
+  utter_find_location:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    text: Θέλεις να εντοπίσουμε το γραφείο διαβατηρίων της περιοχής σου;
+  utter_new_location:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    text: Επιθυμείς νέα αναζήτηση γραφείου διαβατηρίων;
+  utter_ask_location:
+  - text: Ποιά η περιοχή ή ο Δήμος κατοικίας σου ; (Aυτή τη στιγμή γνωρίζω μόνο γραφεία
+      Αθήνας και Θεσσαλονίκης)
+  utter_slots_location_values:
+  - text: 'Παρακαλώ περίμενε.. θα κάνω αναζήτηση 🔦 στα Γραφεία Διαβατηρίων, για την
+      περιοχή/Δήμο κατοικίας : {location}.'
+  utter_send_with_email:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    text: Θα ήθελες να σου στείλω με 📧 email όλες τις πληροφορίες;
+
+  utter_ask_email:
+  - text: Ποιό είναι το 📧 email σου; Γράψε άκυρο αν δεν επιθυμείς τελικά την αποστολή.
+  utter_no_email:
+  - text: 🤔 Δεν είμαι σίγουρος ότι είναι έγκυρο το 📧 email, σε παρακαλώ βεβαιώσου
+      για την την ορθή διεύθυνση.
+  utter_accept_email:
+  - text: 👍 Ευχαριστώ για το 📧 email σου {email}.
+
+  utter_WhoCanHave_Visa:
+  - text: Θα πρέπει κατ'ελάχιστο να διαθέτεις έγκυρο διαβατήριο και να καταβάλεις το ακριβές προξενικό τέλος. 
+
+  utter_country_need_visa:
+  - text: "Η επιλεγμένη χώρα απαιτεί έκδοση βίζα"
+
+  utter_country_dont_need_visa:
+  - text: "Η επιλεγμένη χώρα δεν απαιτεί έκδοση βίζα"
+
+  utter_ekaa_place_of_submission_efka:
+  - text: "Για τους ασφαλισμένους πολίτες η έκδοση πραγματοποιείται ηλεκτρονικά στην τοποθεσία https://www.efka.gov.gr."
+
+  utter_ekaa_place_of_submission_university:
+  - text: "Για τους ανασφάλιστους φοιτητές  η έκδοση πραγματοποιείται στο τμήμα φοιτητικής μέριμνας του Πανεπιστημίου."
+
+  utter_cost_ekaa:
+  - text: H έκδοση της ΕΚΑΑ είναι δωρεάν. 
+
+  utter_visa_with_no_details:
+  - text: "Για περισσότερες λεπτομέρειες για την επιλεγμένη χώρα "
+
+  utter_ask_answer1:
+  - buttons:
+    - payload: /q1{{"answer1":"A0001"}}
+      title: Αρχική έκδοση
+    - payload: /q1{{"answer1":"A0002"}}
+      title: Ανανέωση
+    - payload: /q1{{"answer1":"A0003"}}
+      title: Αντικατάσταση
+    - payload: /q1{{"answer1":"A0004"}}
+      title: Απώλεια/κλοπή
+    text: Ποιά περίπτωση ισχύει από τα παρακάτω για την έκδοση του διαβατηρίου;
+
+  utter_ask_answer2:
+  - buttons:
+    - payload: /q2{{"answer2":"A0005"}}
+      title: Ενήλικος
+    - payload: /q2{{"answer2":"A0006"}}
+      title: Ανήλικος <12 ετών
+    - payload: /q2{{"answer2":"A0007"}}
+      title: Ανήλικος 12 ετών
+    - payload: /q2{{"answer2":"A0008"}}
+      title: Ανήλικος 13-14 ετών
+    - payload: /q2{{"answer2":"A0009"}}
+      title: Ανήλικος >14 ετών
+    text: Σε ποιά ηλικιακή ομάδα εντάσσεται ο ενδιαφερόμενος (κλεισμένα έτη);
+
+
+  utter_ask_answer3:
+  - buttons:
+    - payload: /q3{{"answer3":"A0011"}}
+      title: Όχι ✖
+    - payload: /q3{{"answer3":"A0010"}}
+      title: Ναι ✔
+    text: Υπάρχει πρόβλημα αυτοπρόσωπης παρουσίας για την έκδοση διαβατηρίου;
+  utter_ask_answer4:
+  - buttons:
+    - payload: /q4{{"answer4":"A0013"}}
+      title: Όχι ✖
+    - payload: /q4{{"answer4":"A0012"}}
+      title: Ναι ✔
+    text: Ο ενδιαφερόμενος τελεί σε απαγόρευση εξόδου από την χώρα αλλά απατείται
+      κατ' εξαίρεση έκδοση διαβατηρίου;
+  utter_ask_answer5:
+  - buttons:
+    - payload: /q5{{"answer5":"A0014"}}
+      title: Όχι ✖
+    - payload: /q5{{"answer5":"A0015"}}
+      title: Ναι ✔, υπάρχει μόνιμη αναπηρία
+    - payload: /q5{{"answer5":"A0016"}}
+      title: Ναι ✔, υπάρχει προσωρινή αναπηρία
+    text: Υπάρχει πρόβλημα λήψης δακτυλικών αποτυπωμάτων;
+  utter_ask_answer6:
+  - buttons:
+    - payload: /q6{{"answer6":"A0018"}}
+      title: Όχι ✖
+    - payload: /q6{{"answer6":"A0017"}}
+      title: Ναι ✔
+    text: Το διαβατήριο αφορά μεταγωγή κρατουμένου;
+  utter_ask_answer7:
+  - buttons:
+    - payload: /q7{{"answer7":"A0020"}}
+      title: Όχι ✖
+    - payload: /q7{{"answer7":"A0019"}}
+      title: Ναι ✔
+    text: Το διαβατήριο αφορά μόνιμο κάτοικο εξωτερικού χωρίς Αστυνομική Ταυτότητα;
+  utter_ask_answer8:
+  - buttons:
+    - payload: /q8{{"answer8":"A0022"}}
+      title: Όχι ✖
+    - payload: /q8{{"answer8":"A0021"}}
+      title: Ναι ✔
+    text: Υπάρχει κάποιο ζήτημα στην υποβαλλόμενη φωτογραφία λόγω προβλημάτων όρασης;
+  utter_ask_answer9:
+  - buttons:
+    - payload: /q9{{"answer9":"A0024"}}
+      title: Όχι ✖
+    - payload: /q9{{"answer9":"A0023"}}
+      title: Ναι ✔
+    text: Ο ενδιαφερόμενος είναι υπό επιτροπεία ή δικαστική συμπαράσταση;
+  utter_ask_answer10:
+  - buttons:
+    - payload: /q10{{"answer10":"A0026"}}
+      title: Όχι ✖
+    - payload: /q10{{"answer10":"A0025"}}
+      title: Ναι ✔
+    text: Ο ενδιαφερόμενος είναι μήπως ανυπότακτος εξωτερικού;
+  utter_ask_answer11:
+  - buttons:
+    - payload: /q11{{"answer11":"A0028"}}
+      title: Όχι ✖
+    - payload: /q11{{"answer11":"A0027"}}
+      title: Ναι ✔
+    text: Απαιτείται μήπως επείγουσα έκδοση διαβατηρίου εντός μίας (1) εργάσιμης ημέρας;
+  utter_ask_answer12:
+  - buttons:
+    - payload: /q12{{"answer12":"A0030"}}
+      title: Όχι ✖
+    - payload: /q12{{"answer12":"A0029"}}
+      title: Ναι ✔
+    text: Απαιτείται κατ'εξαίρεση χορήγηση διαβατηρίου για νοσηλεία στην αλλοδαπή,
+      μετά από κλοπή/απώλεια και πριν την ολοκλήρωση των σχετικών ερευνών;
+  utter_evidence_passport:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    - payload: /list_of_evidence
+      title: Δώσε μου λίστα 🧾 των πιθανών δικαιολογητικών
+    text: "Τα δικαιολογητικά που απαιτούνται για την έκδοση διαβατηρίου κυμαίνονται\
+      \ από 4 έως 18, αναλόγως την περίπτωση.\nΘα ήθελες να δούμε μαζί ποια ακριβώς\
+      \ απαιτούνται για την περίπτωσή σου;"
+  utter_evidence1:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    text: Θα ήθελες να δούμε μαζί ποια ακριβώς απαιτούνται για την περίπτωσή σου;
+  utter_inform_evidence:
+  - text: "\U0001F44D Ωραία.\n- θα προχωρήσω σε κάποιες ερωτήσεις.\n- Ανάλογα με τις\
+      \ απαντήσεις σου  θα ανακαλύψουμε τα δικαιολογητικά, το κόστος και το είδος\
+      \ του διαβατηρίου που αντιστοιχεί .\n- Επίλεξε τις απαντήσεις σου πατώντας τα\
+      \  κουμπιά \U0001F39B και σε περίπτωση που επιθυμείς διακοπή της διαδικασίας\
+      \ μπορείς να  πληκτρολογήσεις το νέο ερώτημα σου ή γράψε **επιλογές**  για να\
+      \ εμφανιστούν οι κατηγορίες πληροφόρησης."
+  - text: "\U0001F44D Τέλεια.\n- θα προχωρήσω σε κάποιες ερωτήσεις.\n- Ανάλογα με\
+      \ τις απαντήσεις σου  θα ανακαλύψουμε τα δικαιολογητικά, το κόστος και το είδος\
+      \ του διαβατηρίου που αντιστοιχεί .\n- Επίλεξε τις απαντήσεις σου πατώντας τα\
+      \  κουμπιά \U0001F39B και σε περίπτωση που επιθυμείς διακοπή της διαδικασίας\
+      \ μπορείς να  πληκτρολογήσεις το νέο ερώτημα σου ή γράψε **επιλογές**  για να\
+      \ εμφανιστούν οι κατηγορίες πληροφόρησης."
+  - text: "\U0001F44D Θαυμάσια.\n- θα προχωρήσω σε κάποιες ερωτήσεις.\n- Ανάλογα με\
+      \ τις απαντήσεις σου  θα ανακαλύψουμε τα δικαιολογητικά, το κόστος και το είδος\
+      \ του διαβατηρίου που αντιστοιχεί .\n- Επίλεξε τις απαντήσεις σου πατώντας τα\
+      \  κουμπιά \U0001F39B και σε περίπτωση που επιθυμείς διακοπή της διαδικασίας\
+      \ μπορείς να  πληκτρολογήσεις το νέο ερώτημα σου ή γράψε **επιλογές**  για να\
+      \ εμφανιστούν οι κατηγορίες πληροφόρησης."
+  utter_procedure_question:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    text: Θα ήθελες να δεις την διαδικασία που πρέπει να ακολουθήσεις για την έκδοση
+      διαβατηρίου;
+  utter_about_details:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    text: Θα ήθελες να σου δώσω περισσότερες πληροφορίες σχετικά με το διαβατήριο;
+  utter_poreia_aithshs:
+  - text: Για να ενημερωθείς για την πορεία εξέλιξης της αίτησης έκδοσης του διαβατηρίου
+      σου πάτησε [εδώ](http://www.passport.gov.gr/passports/SearchPass/).
+  utter_eparavolo:
+  - text: Για να ενημερωθείς για τo ηλεκτρονικό παράβολο (e-paravolo) πάτησε [εδώ](http://www.passport.gov.gr/diadikasia-ekdosis/documents/eparavolo.html).
+  utter_passport_photo:
+  - text: Για να ενημερωθείς για τις τεχνικές προδιαγραφές της φωτογραφίας των διαβατηρίων
+      πάτησε [εδώ](http://www.passport.gov.gr/tools/downloads/texnikes-prodiagrafes-photo/).
+  utter_last_think:
+  - text: Κάτι τελευταίο, αλλά σημαντικό...
+  utter_feedback:
+  - buttons:
+    - payload: /affirm
+      title: Ναι, ήταν χρήσιμη ✔
+    - payload: /deny
+      title: Όχι και τόσο ✖
+    text: Ήταν χρήσιμη η συνομιλία μας;
+  utter_thanks:
+  - text: Ευχαριστώ για την εμπιστοσύνη σου 😃
+  - text: Σε ευχαριστώ για την εμπιστοσύνη σου 😃
+  - text: Χαίρομαι που το ακούω! Ευχαριστώ για την εμπιστοσύνη σου 😃
+  utter_never_mind:
+  - text: Λυπάμαι που το ακούω 😢, ελπίζω την επόμενη φορά να είναι περισσότερο χρήσιμη.
+  - text: Λυπάμαι 😢, ελπίζω την επόμενη φορά να είναι περισσότερο χρήσιμη.
+  - text: Εντάξει 😢, θα προσπαθήσω για το καλύτερο την επόμενη φορά .
+  utter_noworries:
+  - text: 😊 Παρακαλώ!
+  - text: 😄 Ευχαρίστησή μου!
+  - text: 👏 Χαίρομαι να βοηθάω!
+  utter_your_opinion:
+  - buttons:
+    - payload: /affirm
+      title: Ναι ✔
+    - payload: /deny
+      title: Όχι ✖
+    text: Θα ήθελες να μου πεις τη γνώμη σου από τη χρήση του chatbot;
+  utter_iamabot:
+  - text: "Είμαι chatbot. Το virtual όνομα μου είναι TravelDocBot  🌏, και είμαι\
+      \ ο αυτόματος ψηφιακός βοηθός σου για την έκδοση διαβατηρίου,βίζα και Ε.Κ.Α.Α.\n Μπορείς να μάθεις\
+      \ για τα chatbots περισσότερα [εδώ](https://en.wikipedia.org/wiki/Chatterbot)."
+  utter_restart:
+  - text: Συγχαρητήρια, με επανεκκίνησες! 😉
+  utter_restart_with_button:
+  - buttons:
+    - payload: /restart
+      title: Επανεκκίνηση
+    - payload: /menu
+      title: Επιλογές πληροφόρησης
+    text: Πάτησε Επανεκκίνηση εάν θέλεις να με επανεκκινήσεις ή τις επιλογές πληροφόρησης
+      για την εμφάνισή τους
+  utter_ask_rephrase:
+  - text: Επαναδιατύπωσε σε παρακαλώ...
+  - text: Επαναδιατύπωσε σε παρακαλώ αυτό που θέλεις...
+  - text: Πες μου λίγο διαφορετικά αυτό που θέλεις...
+  utter_out_of_scope:
+  - text: Άσχετο
+  utter_fine:
+  - text: 🙂 Είμαι καλά, ευχαριστώ! Ελπίζω το ίδιο κι εσύ.
+  - text: 🙂 Πολύ καλά, ευχαριστώ!
+  - text: 🙂 Είμαι καλά, ευχαριστώ που ρωτάς!
+  - text: 🙂 Μιά χαρά, ευχαριστώ!
+  - text: 🙂 Όλα καλά, ευχαριστώ!
+
+  utter_anything_else:
+  - text: Τι άλλο μπορώ να κάνω για σένα; Σε κάθε περίπτωση γράψε **επιλογές** αν θες να μεταβείς στις αρχικές επιλογές πληροφόρησης.
+  - text: Που αλλού μπορώ να φανώ χρήσιμος; Σε κάθε περίπτωση γράψε **επιλογές** αν θες να μεταβείς στις αρχικές επιλογές πληροφόρησης.
+  - text: Πως να βοηθήσω περαιτέρω; Σε κάθε περίπτωση γράψε **επιλογές** αν θες να μεταβείς στις αρχικές επιλογές πληροφόρησης.
+  - text: Είμαι διαθέσιμος να με ρωτήσεις ότι άλλο θέλεις. Σε κάθε περίπτωση γράψε **επιλογές** αν θες να μεταβείς στις αρχικές επιλογές πληροφόρησης.
+
+  utter_anything_else_visa:
+  - text: Τι άλλο μπορώ να κάνω για σένα; Αν θες να μάθεις περισσότερα για την επιλεγμένη χώρα γράψε **λεπτομέρειες βίζα**.
+  - text: Που αλλού μπορώ να φανώ χρήσιμος; Αν θες να μάθεις περισσότερα για την επιλεγμένη χώρα γράψε **λεπτομέρειες βίζα**.
+  - text: Πως να βοηθήσω περαιτέρω; Αν θες να μάθεις περισσότερα για την επιλεγμένη χώρα γράψε **λεπτομέρειες βίζα**.
+  - text: Είμαι διαθέσιμος να με ρωτήσεις ότι άλλο θέλεις. Αν θες να μάθεις περισσότερα για την επιλεγμένη χώρα γράψε **λεπτομέρειες βίζα**.
+  
+  utter_Choose_Country_for_category:
+  - text: "Θες να μάθεις για βίζα ή Ε.Κ.Α.Α; Μπορείς πληκτρολογήσεις βίζα ή εκαα και την χώρα. Για παράδειγμα βίζα Βιετνάμ ή εκαα Γαλλία."
+
+actions:
+- action_reset_all_slots
+- action_reset_all_slots_ButMain
+- action_reset_all_but_few_slots
+- action_db_Place_Of_Submission_location
+- action_db_Place_Of_Submission_Passport
+- action_db_WhoCanHave_Ekaa
+- action_db_countries_need_visa
+- utter_Choose_Country_for_category
+- utter_evidence_forvisa
+- utter_evidence_forcost
+- action_db_evidence_visa
+- validate_evidence_visa_form
+- utter_evidence_passport
+- action_ask_answerVisa2
+- utter_anything_else_visa
+- action_db_Place_Of_Submission_Visa_Embassy
+- action_db_Place_Of_Submission_eVisa
+- action_db_Place_Of_Submission_Visa_OnArrival
+- utter_visa_with_no_details
+- utter_WhoCanHave_Visa
+- utter_ekaa_place_of_submission_efka
+- utter_ekaa_place_of_submission_university
+- action_db_Procedure_Ekaa
+- action_set_Visa_Category
+- action_set_Ekaa_Category
+- action_set_Passport_Category
+- action_send_email
+- action_db_Place_Of_Submission
+- utter_inform_evidence
+- action_db_evidence
+- action_db_list_of_evidence
+- action_db_Duration_Ekaa
+- action_db_Sunday_office
+- action_db_CriterionRequirement
+- action_db_cases_of_passport_issue
+- utter_procedure_question
+- action_db_passport_issue_procedure
+- action_db_about
+- action_db_about_details
+- action_db_visa_duration
+- action_db_about_Ekaa
+- action_db_about_visa
+- action_db_cost
+- action_info
+- action_db_feedback
+- action_db_cancellation_of_passport
+- action_db_emergency_passport_issuance
+- action_db_passport_content
+- action_db_loss_theft_of_passport
+- action_db_legal_resource
+- action_db_duration_of_passport
+- action_db_Countries_Ekaa
+- respond_out_of_scope
+- action_db_this_country_need_visa
+- utter_issue_for_category
+- action_db_visa_issue_procedure
+- utter_greet
+- utter_intro1
+- utter_intro2
+- utter_intro3
+- utter_intro4
+- utter_select_category
+- utter_continue
+- utter_pass_continue
+- utter_visa_continue
+- utter_ekaa_continue
+- utter_question_continue
+- utter_question_continue_visa
+- utter_question_continue_ekaa
+- utter_question_continue2
+- utter_question_continue2_visa
+- utter_question_continue2_ekaa
+- utter_samples_pass
+- utter_samples_visa
+- utter_samples_ekaa
+- utter_non_continue
+- utter_anything_else
+- utter_visa_for_country_detail
+- utter_visa_country_details
+- utter_visa_details
+- utter_country_need_visa
+- utter_country_dont_need_visa
+- utter_ask_answer1
+- utter_ask_answer2
+- utter_ask_answer3
+- utter_ask_answer4
+- utter_ask_answer5
+- utter_ask_answer6
+- utter_ask_answer7
+- utter_ask_answer8
+- utter_ask_answer9
+- utter_ask_answer10
+- utter_ask_answer11
+- utter_ask_answer12
+- validate_cost_visa_form
+- action_ask_answerVisa9
+- action_ask_answerVisa13
+- action_db_cost_visa
+- utter_cost_ekaa
+- action_db_Countries_Details
+- utter_citizen_assured
+
+forms:
+  location_form:
+    required_slots:
+      - location
+  email_form:
+    required_slots:
+      - email
+  evidence_form:
+    required_slots:
+      - answer1
+      - answer11
+      - answer2
+      - answer3
+      - answer4
+      - answer6
+      - answer7
+      - answer8
+      - answer9
+
+  university_form:
+    ignored_intents: []
+    required_slots:
+    - Student_University
+
+  visa_for_country_form:
+    ignored_intents: []
+    required_slots:
+    - country  
+
+  evidence_visa_form:
+    ignored_intents: []
+    required_slots:
+    - evidence_visa
+    - answerVisa1
+    - answerVisa2
+    - answerVisa3
+    - answerVisa4
+    - answerVisa5
+    - answerVisa6
+    - answerVisa7
+    - answerVisa8
+
+  cost_visa_form:
+    ignored_intents: []
+    required_slots:
+    - cost_visa
+    - answerVisa9
+    - answerVisa10 
+    - answerVisa13 
+    - answerVisa14    
+    - answerVisa15
+    - answerVisa16
+    - answerVisa17

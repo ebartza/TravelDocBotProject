@@ -1,0 +1,11 @@
+{
+  "rule_only_slots": [],
+  "rule_only_loops": [
+    "university_form",
+    "cost_visa_form",
+    "location_form",
+    "evidence_visa_form",
+    "visa_for_country_form",
+    "evidence_form"
+  ]
+}
