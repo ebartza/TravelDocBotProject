@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 define
 
 PS-IsLocatedAt-Country sub relation, relates relative-PS-IsLocatedAt-Country, relates relative-Country-LocatesFor-PS;
@@ -106,3 +107,113 @@ when {
 } then {
  (relative-Answers-throughChannel-Rules: $answers, relative-Rules-throughChannel-Answers: $rules) isa Rules-throughChannel-Answer;
 };
+=======
+define
+
+PS-IsLocatedAt-Country sub relation, relates relative-PS-IsLocatedAt-Country, relates relative-Country-LocatesFor-PS;
+ publicService sub entity, plays PS-IsLocatedAt-Country:relative-PS-IsLocatedAt-Country;
+ country sub entity, plays PS-IsLocatedAt-Country:relative-Country-LocatesFor-PS;
+
+rule countryOfPS:
+when {
+(relative-PS-issuedBy-PO:$ps,relative-PO-issues-PS:$po) isa PS-hasContentAuthority-PO;
+(relative-Country-Locates-PO:$country,relative-PO-isLocatedAt-Country: $po) isa PO-IsLocatedAt-Country;
+} then {
+ (relative-PS-IsLocatedAt-Country: $ps, relative-Country-LocatesFor-PS: $country) isa PS-IsLocatedAt-Country;
+};
+
+Rule-IsDefinedBy-Country sub relation, relates relative-Rule-IsDefined-Country, relates relative-Country-Defines-Rule;
+ rules sub entity, plays Rule-IsDefinedBy-Country:relative-Rule-IsDefined-Country;
+ country sub entity, plays Rule-IsDefinedBy-Country:relative-Country-Defines-Rule;
+
+rule countryOfRule:
+when {
+(relative-rules-isFollowedFor-PS:$ru, relative-PS-follows-rules:$ps) isa PS-follows-rules;
+(relative-PS-issuedBy-PO:$ps,relative-PO-issues-PS:$po) isa PS-hasContentAuthority-PO;
+(relative-Country-Locates-PO:$country,relative-PO-isLocatedAt-Country: $po) isa PO-IsLocatedAt-Country;
+} then {
+ (relative-Rule-IsDefined-Country: $ru, relative-Country-Defines-Rule: $country) isa Rule-IsDefinedBy-Country;
+};
+
+Channel-isPoweredBy-Country sub relation, relates relative-Channel-empoweredBy-Country, relates relative-Country-empoweres-Channel;
+channel sub entity, plays Channel-isPoweredBy-Country:relative-Channel-empoweredBy-Country;
+country sub entity, plays Channel-isPoweredBy-Country:relative-Country-empoweres-Channel;
+
+rule countryOfChannel:
+when {
+(relative-PS-has-channels:$ps,relative-channels-toAccess-PS:$ch) isa PS-has-channels;
+(relative-PS-issuedBy-PO:$ps,relative-PO-issues-PS:$po) isa PS-hasContentAuthority-PO;
+(relative-Country-Locates-PO:$country,relative-PO-isLocatedAt-Country: $po) isa PO-IsLocatedAt-Country;
+} then {
+ (relative-Channel-empoweredBy-Country: $ch, relative-Country-empoweres-Channel: $country) isa Channel-isPoweredBy-Country;
+};
+
+Country-HasAnswersFor-Channel sub relation, relates relative-Country-Answers-Channel, relates relative-Answers-ForChannel-Country;
+answers sub entity, plays Country-HasAnswersFor-Channel:relative-Answers-ForChannel-Country;
+country sub entity, plays Country-HasAnswersFor-Channel:relative-Country-Answers-Channel;
+
+rule countryOfAnswerstoChannel:
+when {
+(relative-PS-has-channels:$ps,relative-channels-toAccess-PS:$ch) isa PS-has-channels;
+(relative-PS-issuedBy-PO:$ps,relative-PO-issues-PS:$po) isa PS-hasContentAuthority-PO;
+(relative-Country-Locates-PO:$country,relative-PO-isLocatedAt-Country: $po) isa PO-IsLocatedAt-Country;
+(relative-channel-for-answer: $ch,relative-answer-concerns-channel: $answers) isa Answer-concerns-channel;
+} then {
+ (relative-Answers-ForChannel-Country: $answers, relative-Country-Answers-Channel: $country) isa Country-HasAnswersFor-Channel;
+};
+
+
+Channel-HasAnswersFor-Evidence sub relation, relates relative-Answers-ForEvidenceOf-Channel, relates relative-Channel-ForEvidenceOf-Answers;
+channel sub entity, plays Channel-HasAnswersFor-Evidence:relative-Channel-ForEvidenceOf-Answers;
+answers sub entity, plays Channel-HasAnswersFor-Evidence:relative-Answers-ForEvidenceOf-Channel;
+
+rule AnswersOfEvidenceForChannel:
+when {
+(relative-Channel-has-Evidence:$ch, relative-evidence-for-channel:$ev) isa Channel-has-Evidence;
+(relative-answer-excludes-evidence:$an,relative-evidence-excluded-for-answer:$ev) isa answer-excludes-evidence;
+} then {
+ (relative-Answers-ForEvidenceOf-Channel:$an, relative-Channel-ForEvidenceOf-Answers:$ch) isa Channel-HasAnswersFor-Evidence;
+};
+
+
+Country-HasOutput-Answers sub relation, relates relative-Country-ForOutput-Answers, relates relative-Answers-ForOutput-Country;
+country sub entity, plays Country-HasOutput-Answers:relative-Country-ForOutput-Answers;
+answers sub entity, plays Country-HasOutput-Answers:relative-Answers-ForOutput-Country;
+
+rule AnswersOutputforCountry:
+when {
+ (relative-Output-isValidFor-Country:$ou,relative-Country-HasValid-Output:$country) isa Output-IsValidFor-Country;
+ (relative-answer-has-output:$answer,relative-output-for-answer:$ou) isa answer-conserns-output;
+} then {
+ (relative-Country-ForOutput-Answers:$country, relative-Answers-ForOutput-Country:$answer) isa Country-HasOutput-Answers;
+};
+
+
+
+Cost-PSPoweredBy-Country sub relation, relates relative-Cost-PSPoweredBy-Country, relates relative-Country-PSPowers-Cost;
+cost sub entity, plays Cost-PSPoweredBy-Country:relative-Cost-PSPoweredBy-Country;
+country sub entity, plays Cost-PSPoweredBy-Country:relative-Country-PSPowers-Cost;
+
+rule countryOfCost:
+when {
+(relative-PS-Has-Cost:$ps,relative-Cost-For-PS:$cost) isa PS-Has-Cost;
+(relative-PS-issuedBy-PO:$ps,relative-PO-issues-PS:$po) isa PS-hasContentAuthority-PO;
+(relative-Country-Locates-PO:$country,relative-PO-isLocatedAt-Country: $po) isa PO-IsLocatedAt-Country;
+} then {
+ (relative-Cost-PSPoweredBy-Country: $cost, relative-Country-PSPowers-Cost: $country) isa Cost-PSPoweredBy-Country;
+};
+
+
+
+Rules-throughChannel-Answer sub relation, relates relative-Rules-throughChannel-Answers, relates relative-Answers-throughChannel-Rules;
+answers sub entity, plays Rules-throughChannel-Answer:relative-Answers-throughChannel-Rules;
+rules sub entity, plays Rules-throughChannel-Answer:relative-Rules-throughChannel-Answers;
+
+rule RulesOfChannelAnswers:
+when {
+(relative-channel-accessedThrough-rules:$ch, relative-rules-ifaccessedThrough-channel:$rules) isa Rules-ifAccessedThrough-channel;
+(relative-channel-for-answer: $ch,relative-answer-concerns-channel: $answers) isa Answer-concerns-channel;
+} then {
+ (relative-Answers-throughChannel-Rules: $answers, relative-Rules-throughChannel-Answers: $rules) isa Rules-throughChannel-Answer;
+};
+>>>>>>> 0da209a65d0dd8ad87df09e1cf051509219da58b

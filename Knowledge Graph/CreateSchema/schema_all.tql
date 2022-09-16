@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 define
     lifeEvent sub entity,
       plays LE-Contains-PS:relative-LE-Contains-PS,
@@ -129,3 +130,136 @@ Rules-ifAccessedThrough-channel sub relation, relates relative-channel-accessedT
 Answer-concerns-channel sub relation, relates relative-channel-for-answer, relates relative-answer-concerns-channel;
 answers sub entity, plays Answer-concerns-channel:relative-answer-concerns-channel;
 
+=======
+define
+    lifeEvent sub entity,
+      plays LE-Contains-PS:relative-LE-Contains-PS,
+        owns identifier @key,
+        owns name,
+        owns description,
+        owns lifeEventType;
+  
+    publicService sub entity,
+      plays LE-Contains-PS:relative-PS-IsGroupedBy-LE,
+        owns identifier @key,
+        owns name,
+        owns description;
+
+lifeEventType sub string_attribute, regex "^(Η απόκτηση ενός παιδιού|Να γίνεις (κοινωνικός) φροντιστής|Έναρξη εκπαίδευσης|Αναζήτηση για μια νέα θέση εργασίας|Απώλεια/αποχώρηση εργασίας|Ψάχνωντας για ένα μέρος για να ζήσετε|Αλλαγή κατάστασης σχέσης|Οδήγηση οχήματος|Ταξιδεύοντας στο εξωτερικό|Μετακίνηση προς/από τη χώρα|Υπηρετώντας στη στρατιωτική θητείαΑντιμετώπιση έκτακτης ανάγκης/προβλήματος υγείας|Αντιμετωπίζοντας ένα έγκλημα|Σύνταξη|Θανατος συγγενούς)$";
+processingTime sub string_attribute;
+  
+LE-Contains-PS sub relation,
+        relates relative-LE-Contains-PS,
+        relates relative-PS-IsGroupedBy-LE;
+    PS-Fulfills-Questions sub relation, relates relative-PS-Fulfills-Questions, relates relative-Questions-Fulfilled-PS;
+    publicService sub entity, plays PS-Fulfills-Questions:relative-PS-Fulfills-Questions;
+    questions sub entity, plays PS-Fulfills-Questions:relative-Questions-Fulfilled-PS;
+
+    PS-Produces-Output sub relation,relates relative-PS-Produces-Output ,relates relative-Output-ProducedFor-PS;
+    publicService sub entity, plays PS-Produces-Output:relative-PS-Produces-Output;
+    output sub entity, plays PS-Produces-Output:relative-Output-ProducedFor-PS;
+
+    PS-HasInput-Evidence sub relation, relates relative-PS-Has-Evidence,relates relative-Evidence-InputFor-PS;
+    publicService sub entity, plays PS-HasInput-Evidence:relative-PS-Has-Evidence;
+    evidence sub entity, plays PS-HasInput-Evidence:relative-Evidence-InputFor-PS;
+
+    PS-Has-Cost sub relation, relates relative-PS-Has-Cost,relates relative-Cost-For-PS;
+    publicService sub entity, plays PS-Has-Cost:relative-PS-Has-Cost;
+    cost sub entity, plays PS-Has-Cost:relative-Cost-For-PS;
+
+    output sub entity,
+        owns typeOutput,
+        owns category,
+	owns categoryDuration;
+
+  typeOutput sub string_attribute, regex "^(Έγγραφο δήλωσης|Φυσικό αντικείμενο|Κώδικας|Οικονομική υποχρέωση|Οικονομικό όφελος|Αναγνώριση|Αδειοδότηση)$";
+  category sub string_attribute;
+  categoryDuration sub string_attribute;
+    publicOrganization sub entity,
+    plays PS-hasContentAuthority-PO:relative-PO-issues-PS,
+    plays PO-IsLocatedAt-Country:relative-PO-isLocatedAt-Country,
+        owns identifier @key,
+        owns name,
+        owns preferredLabel;
+
+    country sub entity,
+    plays PO-IsLocatedAt-Country:relative-Country-Locates-PO,
+    plays Output-IsValidFor-Country:relative-Country-HasValid-Output,
+        owns identifier @key,
+        owns code,
+        owns name,
+	owns capital_name,
+	owns description;
+
+     preferredLabel sub string_attribute;
+     code sub string_attribute;
+     capital_name sub string_attribute;
+
+PS-hasContentAuthority-PO sub relation, relates relative-PO-issues-PS, relates relative-PS-issuedBy-PO;
+publicService sub entity, plays PS-hasContentAuthority-PO:relative-PS-issuedBy-PO;
+
+PO-IsLocatedAt-Country sub relation, relates relative-PO-isLocatedAt-Country, relates relative-Country-Locates-PO;
+
+Output-IsValidFor-Country sub relation, relates relative-Country-HasValid-Output, relates relative-Output-isValidFor-Country;
+output sub entity, plays Output-IsValidFor-Country:relative-Output-isValidFor-Country;
+
+    rules sub entity,
+      plays PS-follows-rules:relative-rules-isFollowedFor-PS,
+      plays Rules-ifAccessedThrough-channel:relative-rules-ifaccessedThrough-channel,
+        owns identifier @key,
+        owns name,
+        owns description,
+	owns sort_description,
+        owns specialConditions;
+  
+    channel sub entity,
+      plays PS-has-channels:relative-channels-toAccess-PS,
+      plays Cost-ifAccessedThrough-channels:relative-channel-accessedThrough-cost,
+      plays Channel-has-Evidence:relative-Channel-has-Evidence,
+      plays Channel-ownedBy-PO:relative-channel-ownedBy-PO,
+      plays Rules-ifAccessedThrough-channel:relative-channel-accessedThrough-rules,
+      plays Answer-concerns-channel:relative-channel-for-answer,
+        owns identifier @key,
+        owns channelType,
+        owns processingTime,
+        owns name,
+        owns address,
+        owns phone,
+        owns email,
+        owns serviceURL,
+        owns hoursAvailable;
+
+  cost sub entity, owns comment, owns processingTime;
+
+  address sub string_attribute;
+  hoursAvailable sub string_attribute;
+  email sub string_attribute;
+  phone sub string_attribute;
+  serviceURL sub string_attribute;
+  sort_description sub string_attribute;
+  specialConditions sub string_attribute;
+  comment sub string_attribute;
+
+channelType sub string_attribute, regex "^(E-mail|Αρχική σελίδα|Fax|Βοηθός|Τηλέφωνο|Εφαρμογή για κινητό|Ψηφιακή τηλεόραση|Ταχυδρομείο|Γραφείο εξυπηρέτησης|Τοποθεσία πελάτη)$";
+  
+PS-has-channels sub relation, relates relative-PS-has-channels, relates relative-channels-toAccess-PS;
+publicService sub entity, plays PS-has-channels:relative-PS-has-channels;
+
+Cost-ifAccessedThrough-channels sub relation, relates relative-cost-ifAccessedThrough-channel, relates relative-channel-accessedThrough-cost;
+cost sub entity, plays Cost-ifAccessedThrough-channels:relative-cost-ifAccessedThrough-channel;
+
+Channel-has-Evidence sub relation, relates relative-Channel-has-Evidence, relates relative-evidence-for-channel;
+evidence sub entity, plays Channel-has-Evidence:relative-evidence-for-channel;
+
+PS-follows-rules sub relation, relates relative-rules-isFollowedFor-PS, relates relative-PS-follows-rules;
+publicService sub entity, plays PS-follows-rules:relative-PS-follows-rules;
+
+Channel-ownedBy-PO sub relation, relates relative-channel-ownedBy-PO, relates relative-PO-ownes-channel;
+publicOrganization sub entity, plays Channel-ownedBy-PO:relative-PO-ownes-channel;
+
+Rules-ifAccessedThrough-channel sub relation, relates relative-channel-accessedThrough-rules, relates relative-rules-ifaccessedThrough-channel;
+
+Answer-concerns-channel sub relation, relates relative-channel-for-answer, relates relative-answer-concerns-channel;
+answers sub entity, plays Answer-concerns-channel:relative-answer-concerns-channel;
+
+>>>>>>> 0da209a65d0dd8ad87df09e1cf051509219da58b
